@@ -1,9 +1,23 @@
 
 var reqHost = 'https://wap.jzxcxin.xyz/noworry';
+// var reqHost = 'http://localhost:9797';
 
-var ajax = function(options) {
-  var token = global.token || '7123456';
+var app = getApp();
+
+var ajax = function(options, retry) {
+  var token = global.token;
   var url = options.url || '404';
+  if (url !== '/api/user/login' && (!token || token == '')) {
+    if (retry > 30) {
+      console.log('=== retry to much!!! ===')
+      return;
+    }
+    setTimeout(function(){
+      console.log('retry: ', retry || 0)
+      ajax(options, (retry || 0 ) + 1);
+    }, 300)
+    return;
+  }
   var reqData = options.data || {};
 
   wx.request({
@@ -11,7 +25,7 @@ var ajax = function(options) {
     method: options.method,
     header: {
       'content-type': 'application/x-www-form-urlencoded',
-      'Authorization': token
+      'Authorization': token || 'first none token'
     },
     dataType: 'json',
     data: reqData,
@@ -28,27 +42,31 @@ var ajax = function(options) {
           }
         }
       }else {
-        options.fail || options.fail(res);
+        if (options.fail) {
+          options.fail(res);
+        }
       }
     }
   })
 }
 
-var get = function(url, data, callback) {
+var get = function (url, data, callback, success) {
   ajax({
     url: url,
     method: 'GET',
     data: data,
-    callback: callback
+    callback: callback,
+    success: success
   })
 }
 
-var post = function(url, data, callback) {
+var post = function(url, data, callback, success) {
   ajax({
     url: url, 
     method: 'POST',
     data: data,
-    callback: callback
+    callback: callback,
+    success: success
   })
 }
 

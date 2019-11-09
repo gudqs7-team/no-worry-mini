@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "mp-searchbar": "../weui/searchbar/searchbar",
-    "mp-badge": "../weui/badge/badge"
+    "mp-searchbar": "../../weui/searchbar/searchbar",
+    "mp-badge": "../../weui/badge/badge",
+    "mp-halfScreenDialog": "../../weui/half-screen-dialog/half-screen-dialog"
   }
 }

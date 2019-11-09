@@ -1,6 +1,6 @@
 const config = require('./config')
+const req = require('./util/req.js');
 
-global.isDemo = true
 App({
   onLaunch(opts) {
     // on lanch
@@ -9,6 +9,8 @@ App({
     global.width = sys.windowWidth;
     global.isIpx = sys.model.indexOf('iPhone X') !== -1;
     global.maxCartCount = 10;
+    
+    this.initLogin();
   },
   onShow(opts) {
     console.log('App Show', opts)
@@ -23,36 +25,76 @@ App({
 
     }
   },
-  // lazy loading openid
-  getUserOpenId(callback) {
-    const self = this
-
-    if (self.globalData.openid) {
-      callback(null, self.globalData.openid)
+  initLogin(){
+    var that = this;
+    var openId = this.getOpenIdByLocal();
+    var user = this.getUserInfoByLocal();
+    var token = this.getTokenByLocal();
+    
+    if (!openId || openId == ''){
+      that.getOpenId()
     } else {
-      wx.login({
-        success(data) {
-          wx.request({
-            url: config.openIdUrl,
-            data: {
-              code: data.code
-            },
-            success(res) {
-              console.log('拉取openid成功', res)
-              self.globalData.openid = res.data.openid
-              callback(null, self.globalData.openid)
-            },
-            fail(res) {
-              console.log('拉取用户openid失败，将无法正常使用开放接口等服务', res)
-              callback(res)
-            }
-          })
-        },
-        fail(err) {
-          console.log('wx.login 接口调用失败，将无法正常使用开放接口等服务', err)
-          callback(err)
-        }
-      })
+      global.openId = openId;
+      global.user = user;
+      global.token = token;
     }
+  },
+  getOpenId(callback){
+    var that = this;
+    wx.login({
+      success(data) {
+        var code = data.code;
+        req.post('/api/user/login', {
+          code: code,
+        }, function(){
+
+        }, function(res) {
+          console.log('login: ', res)
+          if (res.success) {
+            var token = res.other;
+            res = res.data;
+            var openId = null;
+            var user = null;
+            if (typeof res === 'object') {
+              openId = res.openId;
+              user = res;
+            } else {
+              openId = res;
+            }
+            that.saveToLocal(openId, user, token);
+            if (callback) {
+              callback(openId, user, token);
+            }
+          }
+        })
+      }
+    })
+  },
+  getOpenIdByLocal(){
+    return wx.getStorageSync('__open_id__');
+  },
+  getUserInfoByLocal() {
+    var userStr = wx.getStorageSync('__user__');
+    if (userStr && userStr != '') {
+      return JSON.parse(userStr)
+    }
+    return null;
+  },
+  saveToLocal(openId, user, token){
+    if (openId && openId != '') {
+      global.openId = openId;
+      wx.setStorageSync('__open_id__', openId)
+    }
+    if (user && user != '') {
+      global.user = user;
+      wx.setStorageSync('__user__', JSON.stringify(user));
+    }
+    if (token && token != '') {
+      global.token = token;
+      wx.setStorageSync('__token__', token)
+    }
+  },
+  getTokenByLocal(){
+    return wx.getStorageSync('__token__');
   }
 })
