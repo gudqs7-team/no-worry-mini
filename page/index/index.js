@@ -12,67 +12,23 @@ Page({
     typeList: [
       {
         snackTypeId: 1,
-        snackTypeName: '精选饮料',
+        snackTypeName: '精选饮料精选饮料',
         nowCount: 2
       }, {
         snackTypeId: 2,
-        snackTypeName: '精选饮料',
+        snackTypeName: '精选饮料1',
         nowCount: 2
       }, {
         snackTypeId: 3,
-        snackTypeName: '精选饮料',
+        snackTypeName: '精选饮料2',
         nowCount: 2
       }, {
         snackTypeId: 4,
-        snackTypeName: '精选饮料',
+        snackTypeName: '精选饮料3',
         nowCount: 99
       }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
-        nowCount: 99
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料',
+        snackTypeId: 5,
+        snackTypeName: '精选饮料5',
         nowCount: 99
       }
     ],
@@ -80,7 +36,7 @@ Page({
     goods: {
       "1": [
         {
-          snackName: '伊利纯牛奶 205ml',
+          snackName: '伊利纯牛奶 205ml 伊利纯牛奶 205ml',
           snackPrice: '9.9',
           snackStock: 8,
           snackSale: 32
