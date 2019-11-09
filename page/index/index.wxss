@@ -106,7 +106,7 @@ page{
 }
 
 .right-goods .goods-item .goods-item-pic {
-  display: inline-block;
+  float: left;
   overflow: hidden;
 }
 .right-goods .goods-item .goods-item-pic image{
@@ -115,9 +115,9 @@ page{
 }
 
 .right-goods .goods-item .goods-detail {
-  display: inline-block;
+  float: left;
+  padding-top: 15rpx;
   height: 200rpx;
-  overflow: hidden;
 }
 
 .right-goods .goods-item .goods-detail .goods-name{
@@ -161,6 +161,15 @@ page{
 }
 
 /* cart */
+
+.cart-ipx .cart-list {
+  bottom: 120rpx!important;
+}
+.cart-ipx .cart-bottom {
+  padding-bottom: 20rpx;
+  height: 120rpx;
+}
+
 .shadow {
   position: fixed;
   background: #2E2E30;
@@ -181,7 +190,7 @@ page{
   position: absolute;
   bottom: 0rpx;
   width: 100%;
-  height: 120rpx;
+  height: 100rpx;
   background: #2E2E30;
 }
 
@@ -211,7 +220,7 @@ page{
 
 .cart-bottom .cart-price-area {
   margin-left: 220rpx;
-  padding-top: 25rpx;
+  padding-top: 15rpx;
   font-size: 42rpx;
   color: white;
 }
@@ -224,13 +233,13 @@ page{
   background: #1EDE53;
   font-size: 42rpx;
   font-weight: bold;
-  height: 120rpx;
-  padding: 25rpx 70rpx;
+  height: 100rpx;
+  padding: 15rpx 70rpx;
 }
 
 .footer-cart .cart-list {
   position: absolute;
-  bottom: 120rpx;
+  bottom: 100rpx;
   width: 100%;
   background: white;
   z-index: 1;

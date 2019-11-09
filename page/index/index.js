@@ -1,5 +1,8 @@
 Page({
   data: {
+    width: global.width,
+    height: (global.height - 48) * 2 - 100,
+    isIpx: global.isIpx,
     typeMap: {
       "1": "精选饮料",
       "2": "精选饮料2",
@@ -137,6 +140,7 @@ Page({
     })
   },
   toggleCartList(){
+    console.log(global);
     var showCart = this.data.showCart == false;
     console.log('toggle: ', this.data.showCart, showCart);
     this.setData({

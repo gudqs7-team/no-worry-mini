@@ -3,7 +3,7 @@
         <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
     </view>
     <view class="page-body">
-        <scroll-view scroll-y="true" class="left-type" >
+        <scroll-view scroll-y="true" class="left-type" style="height: {{height}}rpx">
           <block wx:for="{{typeList}}" wx:for-item="type" wx:key="1">
             <view data-id="{{type.snackTypeId}}" class="type-item {{activeTypeId==type.snackTypeId ? 'active':''}}" bindtap="changeType">
               精选饮料
@@ -14,7 +14,7 @@
         </scroll-view>
 
 
-        <scroll-view scroll-y="true" class="right-goods">
+        <scroll-view scroll-y="true" class="right-goods" style="height: {{height}}rpx">
           <block wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
             <view class="goods-type-head">
               <view class="type-head-name">{{typeMap[typeId]}}</view>
@@ -50,8 +50,8 @@
         </scroll-view>
     </view>
 
-    <view class="footer-cart">
-      <view class="cart-bottom" bindtap="toggleCartList">
+    <view class="footer-cart {{isIpx ? 'cart-ipx' : ''}}">
+      <view class="cart-bottom " bindtap="toggleCartList">
         <view class="cart-img-area">
           <text class="iconfont icon-cart cart-icon"></text>
           <mp-badge extClass="cart-count" content="99"/>
