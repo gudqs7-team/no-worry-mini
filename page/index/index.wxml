@@ -1,0 +1,98 @@
+<view class="page">
+    <view class="search-goods">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+    <view class="page-body">
+        <scroll-view scroll-y="true" class="left-type" >
+          <block wx:for="{{typeList}}" wx:for-item="type" wx:key="1">
+            <view data-id="{{type.snackTypeId}}" class="type-item {{activeTypeId==type.snackTypeId ? 'active':''}}" bindtap="changeType">
+              精选饮料
+              <mp-badge extClass="type-item-count" content="{{type.nowCount}}"/>
+            </view>
+          </block>
+          <view class="empty-height-view"></view>
+        </scroll-view>
+
+
+        <scroll-view scroll-y="true" class="right-goods">
+          <block wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
+            <view class="goods-type-head">
+              <view class="type-head-name">{{typeMap[typeId]}}</view>
+              <view class="type-head-filter">
+                <view class="weui-flex">
+                  <view class="weui-flex__item"><view class="filter-item active">销量</view></view>
+                  <view class="weui-flex__item"><view class="filter-item">价格</view></view>
+                </view>
+              </view>
+            </view>
+            <view class="goods-item" wx:for="{{snackList}}" wx:for-item="snack" wx:key="" data-id="{{snack.snackId}}">
+              <view class="goods-item-pic">
+                <image mode="aspectFill" src="http://qiniu.sunbuwen.xin/shangpin1.png.jpg"></image>
+              </view>
+              <view class="goods-detail">
+                <view class="goods-name">{{snack.snackName}}</view>
+                <view class="goods-sale">月销{{snack.snackSale}}份</view>
+                <text wx:if="{{snack.snackStock < 10}}" class="goods-stock">剩{{snack.snackStock}}份</text>
+                <view class="goods-price">
+                  <text class="money-text">¥ </text>
+                  <text class="price-text">{{snack.snackPrice}}</text>
+                </view>
+                <view class="goods-buy">
+                  <text class="icon iconfont icon-substract">  </text>
+                  <text class="buy-count"> 2 </text>
+                  <text class="icon iconfont icon-add">  </text>
+                </view>
+              </view>
+              
+            </view>
+          </block>
+          <view class="empty-height-view"></view>
+        </scroll-view>
+    </view>
+
+    <view class="footer-cart">
+      <view class="cart-bottom" bindtap="toggleCartList">
+        <view class="cart-img-area">
+          <text class="iconfont icon-cart cart-icon"></text>
+          <mp-badge extClass="cart-count" content="99"/>
+        </view>
+        <view class="cart-price-area">
+          $20.9
+        </view>
+        <view class="cart-btn-area" bindtap="goBuyOrder">
+          <text class="cart-btn">去结算</text>
+        </view>
+      </view>
+
+      <view wx:if="{{showCart}}" class="cart-list">
+        <view class="cart-head">
+          <view class="head-left-text">
+            <text class="head-title-text">已选商品</text>
+            <text class="head-sub-title-text"> (共 9 份)</text>
+          </view>
+          <view class="head-right-empty" bindtap="emptyCart">
+            <text class="iconfont icon-trash"></text>
+            <text> 清空 </text>
+          </view>
+        </view>
+        <scroll-view scroll-y="true" class="cart-body">
+          <view class="cart-item" wx:for="{{cartList}}" wx:for-item="cart" wx:key="" data-id="{{cart.cartId}}">
+            <view class="goods-name">{{cart.snackName}}</view>
+            <view class="goods-price">
+                  <text class="money-text">¥ </text>
+                  <text class="price-text">{{cart.snackPrice}}</text>
+                </view>
+            <view class="goods-buy">
+              <text class="icon iconfont icon-substract">  </text>
+              <text class="buy-count"> 2 </text>
+              <text class="icon iconfont icon-add">  </text>
+            </view>
+          </view>
+          <view class="empty-height-view"></view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view wx:if="{{showCart}}" class="shadow" bindtap="closeCart"></view>
+
+</view>

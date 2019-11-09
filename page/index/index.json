@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-searchbar": "../weui/searchbar/searchbar",
+    "mp-badge": "../weui/badge/badge"
+  }
+}
