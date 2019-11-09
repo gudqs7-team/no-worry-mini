@@ -6,8 +6,8 @@
         <scroll-view scroll-y="true" class="left-type" style="height: {{height}}rpx">
           <block wx:for="{{typeList}}" wx:for-item="type" wx:key="1">
             <view data-id="{{type.snackTypeId}}" class="type-item {{activeTypeId==type.snackTypeId ? 'active':''}}" bindtap="changeType">
-              精选饮料
-              <mp-badge extClass="type-item-count" content="{{type.nowCount}}"/>
+              {{type.snackTypeName}}
+              <mp-badge wx:if="{{ cartTypeMap[type.snackTypeId] > 0 }}" extClass="type-item-count" content="{{cartTypeMap[type.snackTypeId]}}"/>
             </view>
           </block>
           <view class="empty-height-view"></view>
@@ -27,7 +27,7 @@
             </view>
             <view class="goods-item" wx:for="{{snackList}}" wx:for-item="snack" wx:key="" data-id="{{snack.snackId}}">
               <view class="goods-item-pic">
-                <image mode="aspectFill" src="http://qiniu.sunbuwen.xin/shangpin1.png.jpg"></image>
+                <image mode="aspectFill" src="{{snack.snackPic}}"></image>
               </view>
               <view class="goods-detail">
                 <view class="goods-name">{{snack.snackName}}</view>
@@ -38,9 +38,9 @@
                   <text class="price-text">{{snack.snackPrice}}</text>
                 </view>
                 <view class="goods-buy">
-                  <text class="icon iconfont icon-substract">  </text>
-                  <text class="buy-count"> 2 </text>
-                  <text class="icon iconfont icon-add">  </text>
+                  <text bindtap="substractSnack" data-id="{{snack.snackId}}" wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="icon iconfont icon-substract">  </text>
+                  <text wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="buy-count"> {{ cartSnackMap[snack.snackId] }} </text>
+                  <text bindtap="addSnack" data-id="{{snack.snackId}}" class="icon iconfont icon-add {{ cartSnackMap[snack.snackId] >= maxCartCount ? 'disable' : '' }}">  </text>
                 </view>
               </view>
               
@@ -57,7 +57,7 @@
           <mp-badge extClass="cart-count" content="99"/>
         </view>
         <view class="cart-price-area">
-          $20.9
+          ¥ 20.9
         </view>
         <view class="cart-btn-area" bindtap="goBuyOrder">
           <text class="cart-btn">去结算</text>

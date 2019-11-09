@@ -5,11 +5,10 @@ App({
   onLaunch(opts) {
     // on lanch
     var sys = wx.getSystemInfoSync();
-    console.log(sys);
     global.height = sys.windowHeight;
     global.width = sys.windowWidth;
     global.isIpx = sys.model.indexOf('iPhone X') !== -1;
-
+    global.maxCartCount = 10;
   },
   onShow(opts) {
     console.log('App Show', opts)

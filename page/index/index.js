@@ -1,73 +1,17 @@
+var req = require("../../util/req.js");
+
 Page({
   data: {
     width: global.width,
     height: (global.height - 48) * 2 - 100,
     isIpx: global.isIpx,
+    maxCartCount: global.maxCartCount,
     typeMap: {
-      "1": "精选饮料",
-      "2": "精选饮料2",
-      "3": "精选饮料3",
-      "5": "精选饮料5"
     },
     typeList: [
-      {
-        snackTypeId: 1,
-        snackTypeName: '精选饮料精选饮料',
-        nowCount: 2
-      }, {
-        snackTypeId: 2,
-        snackTypeName: '精选饮料1',
-        nowCount: 2
-      }, {
-        snackTypeId: 3,
-        snackTypeName: '精选饮料2',
-        nowCount: 2
-      }, {
-        snackTypeId: 4,
-        snackTypeName: '精选饮料3',
-        nowCount: 99
-      }, {
-        snackTypeId: 5,
-        snackTypeName: '精选饮料5',
-        nowCount: 99
-      }
     ],
-    activeTypeId: 3,
+    activeTypeId: 0,
     goods: {
-      "1": [
-        {
-          snackName: '伊利纯牛奶 205ml 伊利纯牛奶 205ml',
-          snackPrice: '9.9',
-          snackStock: 8,
-          snackSale: 32
-        },
-        {
-          snackName: '伊利纯牛奶 205ml',
-          snackPrice: '9.9',
-          snackStock: 8,
-          snackSale: 32
-        },
-        {
-          snackName: '伊利纯牛奶 205ml',
-          snackPrice: '9.9',
-          snackStock: 8,
-          snackSale: 32
-        }
-      ],
-      "2": [
-        {
-          snackName: '伊利纯牛奶 205ml',
-          snackPrice: '9.9'
-        },
-        {
-          snackName: '伊利纯牛奶 205ml',
-          snackPrice: '9.9'
-        },
-        {
-          snackName: '伊利纯牛奶 205ml',
-          snackPrice: '9.9'
-        }
-      ]
     },
     cartList: [
       {
@@ -81,14 +25,114 @@ Page({
         snackPrice: '9.9',
       }
     ],
-    showCart: false
+    showCart: false,
+    cartTypeMap: {
+    },
+    cartSnackMap: {
+      "2": 3
+    }
+  },
+  onLoad(e) {
+    var that = this;
+    console.log('on load..', e);
+    req.post('/api/snack/snackType/list', {}, function(data){
+      that.initTypeMap(data);
+      that.setData({
+        typeList: data
+      })
+      var typeId = that.data.activeTypeId;
+      that.initTypeGoods(typeId, null);
+    })
+  },
+  initTypeMap(data) {
+    var typeMap = {}
+    var cartTypeMap = {}
+    var activeTypeId = 0;
+    for (var i = 0; i < data.length; i++) {
+      var type = data[i];
+      var typeId = type.snackTypeId;
+      if (i === 0) {
+        activeTypeId = typeId;
+      }
+      typeMap[typeId] = type.snackTypeName;
+      cartTypeMap[typeId] = 0;
+    }
+    this.setData({
+      activeTypeId: activeTypeId,
+      typeMap: typeMap,
+      cartTypeMap: cartTypeMap
+    })
+  },
+  initTypeGoods(typeId, searchName) {
+    var that = this;
+    var reqData = {
+      snackTypeId: typeId
+    };
+    if (searchName && searchName != '') {
+      reqData.snackName = searchName;
+    }
+    req.post('/api/snack/snack/list', reqData, function(data){
+      that.initGoods(typeId, data);
+    })
+  },
+  initGoods(typeId, data) {
+    var goods = this.data.goods || {};
+    goods[typeId] = data;
+    var cartSnackMap = this.data.cartSnackMap || {};
+    for (var i = 0; i< data.length; i++) {
+      var snack = data[i];
+      var id = snack.snackId;
+      cartSnackMap[id] = 0;
+    }
+    this.setData({
+      goods: goods,
+      cartSnackMap: cartSnackMap
+    });
   },
   changeType(e){
-    console.log('change', e);
     var typeId = e.target.dataset.id;
     this.setData({
       activeTypeId: typeId
     })
+    this.initTypeGoods(typeId, null);
+  },
+  addSnack(e) {
+    var id = e.target.dataset.id;
+    var cartSnackMap = this.data.cartSnackMap;
+    var count = cartSnackMap[id] || 0;
+    if (count === 0) {
+      this.addToCartList(id);
+    }
+    if (count >= global.maxCartCount) {
+      wx.showToast({
+        title: '不能再加了'
+      });
+      return;
+    }
+    count += 1;
+    cartSnackMap[id] = count;
+    this.setData({
+      cartSnackMap: cartSnackMap
+    })
+  },
+  substractSnack(e) {
+    var id = e.target.dataset.id;
+    var cartSnackMap = this.data.cartSnackMap;
+    var count = cartSnackMap[id] || 0;
+    count -= 1;
+    if (count === 0) {
+      this.deleteFromCartList(id);
+    }
+    cartSnackMap[id] = count;
+    this.setData({
+      cartSnackMap: cartSnackMap
+    })
+  },
+  addToCartList(id) {
+    
+  },
+  deleteFromCartList(id) {
+
   },
   closeCart(){
     this.setData({

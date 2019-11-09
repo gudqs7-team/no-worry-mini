@@ -112,8 +112,11 @@ page{
   padding-top: 20rpx;
 }
 .right-goods .goods-item .goods-item-pic image{
-  width: 200rpx;
-  height: 200rpx;
+  width: 185rpx;
+  height: 190rpx;
+  border-radius: 10px;
+  margin: 5rpx;
+  margin-right: 10px;
 }
 
 .right-goods .goods-item .goods-detail {
@@ -125,9 +128,9 @@ page{
 .right-goods .goods-item .goods-detail .goods-name{
   font-size: 30rpx;
   width: 330rpx;
+  max-height: 100rpx;
   font-weight: bold;
   color: #282828;
-  /* white-space: nowrap; */
   word-break: break-all;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -165,6 +168,10 @@ page{
   padding: 3rpx 5rpx;
   height: 15rpx;
   width: 15rpx;
+}
+
+.goods-buy .icon.disable {
+  background: #757575;
 }
 
 /* cart */
