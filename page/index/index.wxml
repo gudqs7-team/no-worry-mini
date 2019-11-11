@@ -13,15 +13,14 @@
           <view class="empty-height-view"></view>
         </scroll-view>
 
-
-        <scroll-view scroll-y="true" class="right-goods" style="height: {{height}}rpx">
+        <scroll-view scroll-with-animation='true' scroll-y="true" class="right-goods" style="height: {{height}}rpx" scroll-into-view="{{goodsToView}}" >
           <block wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
-            <view class="goods-type-head">
+            <view id="type-{{typeId}}" class="goods-type-head">
               <view class="type-head-name">{{typeMap[typeId]}}</view>
               <view class="type-head-filter">
                 <view class="weui-flex">
-                  <view class="weui-flex__item"><view class="filter-item active">销量</view></view>
-                  <view class="weui-flex__item"><view class="filter-item">价格</view></view>
+                  <view bindtap="sortBySales" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackSale' ? 'active' : '' }}">销量</view></view>
+                  <view bindtap="sortByPrice" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackPrice' ? 'active' : '' }}">价格</view></view>
                 </view>
               </view>
             </view>
@@ -40,7 +39,8 @@
                 <view class="goods-buy">
                   <text bindtap="substractSnack" data-id="{{snack.snackId}}" wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="icon iconfont icon-substract">  </text>
                   <text wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="buy-count"> {{ cartSnackMap[snack.snackId] }} </text>
-                  <text bindtap="addSnack" data-id="{{snack.snackId}}" class="icon iconfont icon-add {{ cartSnackMap[snack.snackId] >= maxCartCount ? 'disable' : '' }}">  </text>
+                  <text bindtap="addSnack" data-id="{{snack.snackId}}" 
+                  class="icon iconfont icon-add {{ cartSnackMap[snack.snackId] >= (goodsMap[snack.snackId].snackStock > 10 ? maxCartCount : goodsMap[snack.snackId].snackStock) ? 'disable' : '' }}">  </text>
                 </view>
               </view>
               
@@ -98,10 +98,16 @@
     <mp-halfScreenDialog show="{{loginNow}}">
       <view slot="title">亲, 点一下就登录了</view>
       <view slot="desc">请点击按钮登录, 此弹框仅出现一次</view>
-      <view slot="footer">
-        <button type="default" bindtap="closeDialog" class="weui-btn">算了</button>
-        <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="weui-btn">登录</button>
+      <view slot="footer" class="weui-flex">
+        <button type="default" bindtap="closeDialog" class="weui-btn weui-flex__item">算了</button>
+        <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="weui-btn weui-flex__item">登录</button>
       </view>
     </mp-halfScreenDialog>
+
+    <view class="user-btn-view" bindtap="goUserPage">
+      <view class="user-btn">
+        <text class="iconfont icon-custom-user icon"></text>
+      </view>
+    </view>
 
 </view>

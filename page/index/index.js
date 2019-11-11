@@ -7,7 +7,7 @@ Page({
     height: (global.height - 48) * 2 - 100,
     isIpx: global.isIpx,
     maxCartCount: global.maxCartCount,
-    needLogin: global.needLogin,
+    needLogin: false,
     loginNow: false,
     typeMap: {
     },
@@ -27,6 +27,13 @@ Page({
     cartTypeMap: {
     },
     cartSnackMap: {
+    },
+    goodsToView: 'toview',
+    desc: {
+
+    },
+    sortBy: {
+
     }
   },
   onLoad(e) {
@@ -52,7 +59,7 @@ Page({
       app.getOpenId(function(openId, user){
         if (user == null) {
           that.setData({
-            loginNow: true
+            needLogin: true
           })
         }
       });
@@ -103,41 +110,88 @@ Page({
     var goods = this.data.goods || {};
     var goodsData = goods[typeId];
     if (goodsData && goodsData.length > 0) {
-      return;
+      this.setData({
+        goodsToView: 'type-' + typeId
+      });
+      return true;
     }
+    this.initGoods(typeId);
+  },
+  initGoods(typeId, search) {
     var that = this;
-    var reqData = {
-      snackTypeId: typeId
-    };
-    if (searchName && searchName != '') {
-      reqData.snackName = searchName;
-    }
     wx.showLoading({
       title: 'Loading',
     });
-    req.post('/api/snack/snack/list', reqData, function(data){
-      wx.hideLoading();
-      that.initGoods(typeId, data);
+
+    var reqData = {
+      snackTypeId: typeId
+    };
+    var sortBy = that.data.sortBy[typeId] || 'displayOrder';
+    var desc = that.data.desc[typeId] || '0';
+    reqData.sortBy = sortBy;
+    reqData.desc = desc === '1';
+
+    if (search) {
+      reqData.snackName = search;
+    }
+    req.post('/api/snack/snack/list', reqData, function (data) {
+      var goods = that.data.goods || {};
+      var goodsMap = that.data.goodsMap || {};
+      goods[typeId] = data;
+      var cartSnackMap = that.data.cartSnackMap || {};
+      for (var i = 0; i < data.length; i++) {
+        var snack = data[i];
+        var id = snack.snackId;
+        snack.snackPriceText = (snack.snackPrice / 100).toFixed(1);
+        cartSnackMap[id] = cartSnackMap[id] || 0;
+        goodsMap[id] = snack;
+      }
+      that.setData({
+        goods: goods,
+        goodsMap: goodsMap,
+        cartSnackMap: cartSnackMap,
+        goodsToView: 'type-' + typeId
+      });
       wx.hideLoading();
     })
+
+    
   },
-  initGoods(typeId, data) {
-    var goods = this.data.goods || {};
-    var goodsMap = this.data.goodsMap || {};
-    goods[typeId] = data;
-    var cartSnackMap = this.data.cartSnackMap || {};
-    for (var i = 0; i< data.length; i++) {
-      var snack = data[i];
-      var id = snack.snackId;
-      snack.snackPriceText = (snack.snackPrice/100).toFixed(1);
-      cartSnackMap[id] = cartSnackMap[id] || 0;
-      goodsMap[id] = snack;
-    }
+  sortBySales(e) {
+    var that = this;
+    var typeId = e.currentTarget.dataset.id;
+    var sortByMap = that.data.sortBy;
+    var descMap = that.data.desc;
+    var sortBy = that.data.sortBy[typeId];
+    var desc = that.data.desc[typeId];
+
+
+    sortByMap[typeId] = sortBy === 'snackSale' ? 'displayOrder' : 'snackSale';
+    descMap[typeId] = '1';
     this.setData({
-      goods: goods,
-      goodsMap: goodsMap,
-      cartSnackMap: cartSnackMap
+      sortBy: sortByMap,
+      desc: descMap
     });
+    this.initGoods(typeId);
+  },
+  sortByPrice(e) {
+    var that = this;
+    var typeId = e.currentTarget.dataset.id;
+    var sortByMap = that.data.sortBy;
+    var descMap = that.data.desc;
+    var sortBy = that.data.sortBy[typeId];
+    var desc = that.data.desc[typeId];
+    var descbool = desc === '1';
+    
+    var cancelSort = sortBy === 'snackPrice' && descbool
+    
+    sortByMap[typeId] = cancelSort ? 'displayOrder' : 'snackPrice';
+    descMap[typeId] = descbool ? '0' : '1';
+    this.setData({
+      sortBy: sortByMap,
+      desc:  descMap
+    });
+    this.initGoods(typeId);
   },
   changeType(e){
     var typeId = e.target.dataset.id;
@@ -146,21 +200,37 @@ Page({
     })
     this.initTypeGoods(typeId, null);
   },
+  checkLogin() {
+    var needLogin = this.data.needLogin;
+    if (needLogin) {
+      this.setData({
+        loginNow: true
+      });
+      return false;
+    }
+    return true;
+  },
   addSnack(e) {
+    if (!this.checkLogin()) {
+      return false;
+    }
     var id = e.target.dataset.id;
     var cartSnackMap = this.data.cartSnackMap;
     var count = cartSnackMap[id] || 0;
+    var goods = this.data.goodsMap[id];
+    var biggerThenCount = goods.snackStock > 10 ? global.maxCartCount : goods.snackStock;
+    if (count >= biggerThenCount) {
+      wx.showToast({
+        title: '不能再加了'
+      });
+      return false;
+    }
     if (count === 0) {
       this.addToCartList(id);
     } else {
       this.updateCartCount(id, count+1);
     }
-    if (count >= global.maxCartCount) {
-      wx.showToast({
-        title: '不能再加了'
-      });
-      return;
-    }
+    
     count += 1;
     cartSnackMap[id] = count;
     this.setData({
@@ -251,6 +321,9 @@ Page({
     })
   },
   emptyCart(e) {
+    if (!this.checkLogin()) {
+      return false;
+    }
     var that = this;
     var totalCount = this.data.cartTotalCount;
     if (totalCount <= 0){
@@ -308,14 +381,23 @@ Page({
         app.saveToLocal(openId, user, token);
         
         that.setData({
-          loginNow: false
+          loginNow: false,
+          needLogin: false
         });
       }
     })
   },
   goBuyOrder(e) {
+    if (!this.checkLogin()) {
+      return false;
+    }
     console.log('order');
-    e.stopProg
+  },
+  goUserPage(e) {
+    console.log('gouser ', e)
+    wx.navigateTo({
+      url: '/page/user/user',
+    });
   },
   onShareAppMessage() {
     return {
