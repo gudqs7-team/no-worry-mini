@@ -1,0 +1,28 @@
+<view style='background:#F2F2F2;'>
+
+  <scroll-view class='addr-list' scroll-y style="height: {{height}}rpx">
+    <block wx:for="{{addressList}}" wx:for-item="addr" wx:key="0">
+      <view class="addr-item">
+        <view class="left-info">
+          <view class="item-head">
+            {{addr.area}}
+          </view>
+          <view class="item-body">
+            {{addr.detailAddress}}
+          </view>
+          <view class="item-footer">
+            {{addr.contactName}} {{addr.contactPhone}}
+          </view>
+        </view>
+        <view class="right-btn">
+          <text class="iconfont icon-edit"></text>
+        </view>
+      </view>
+    </block>
+    <view class="empty-height-view"></view>
+    <view class="empty-height-view"></view>
+  </scroll-view>
+  <view class="add-new {{isIpx ? 'add-new-ipx' : ''}}" bindtap='goAddAddress'>
+    添加新地址
+  </view>
+</view>

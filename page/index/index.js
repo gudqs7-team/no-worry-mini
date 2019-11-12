@@ -396,7 +396,7 @@ Page({
   goUserPage(e) {
     console.log('gouser ', e)
     wx.navigateTo({
-      url: '/page/user/user',
+      url: '/page/user/user'
     });
   },
   onShareAppMessage() {

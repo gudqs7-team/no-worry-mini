@@ -1,10 +1,10 @@
 @font-face {font-family: "iconfont";
-  src: url('//at.alicdn.com/t/font_1500957_lsq8ycxkg4.eot?t=1573481155814'); /* IE9 */
-  src: url('//at.alicdn.com/t/font_1500957_lsq8ycxkg4.eot?t=1573481155814#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAV0AAsAAAAACuAAAAUlAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDXgqIMIZqATYCJAMcCxAABCAFhG0HXRs/CRFVpHuQ/UgwbhrP+lYnqiaSdOthPsSm/rs7AhcuVgmdSarJxB1morDt68SQMnPar6J8EUkDBBCE3Zpq1oABRIB4wtDJ08F/6O0tn6Ss42W4CBXAFrD+//eqZiz9YFk32wISxTm2ZXdQsac0gQr0XvfWnoIUOAWsMHYYu7iM14EAUNEIOZD+A4fr4JCgmQnsW7powSzwmAdSCUHA7XLOrRLIQUTA6TX0OQAH3N8n36At4QBFhEG7dPT8AXPRO2wbPsPMvImpNgna/kIAmLsABiAHQALIlbkRE8yv5MCgSngJOoAEOCjkvlY7JJwarg9Phc/k88THte0ECf0fPICCIAIJDDJAZEBLDNMnVmUgbGvKgALhEBkQIJwqgwgQrpeBBISnZMCA8BkrdpWqnJ0AkALIBICcAPT2FQIK6ZahaIOqRMPyWEyKRfVLytVMZotKLPdaG1AttukIAfYejxCBstwtr4y/t9uDb1pvaKxrX0Obr/e4u8tro196TRfn3gQig/bsEY+/Xmwq3nhjddQ4wW8yXntNL8sIj9gylVRfzsQu1tSbbnmek57mmKW455XMEEadCaZdrLouGdKkct5ixNGWJwQ5VivEngCwbnBmUtO+1iXM8vY4ekhozPv7U5JIzLrjlUanXu10+8sNj780/vxlM9hTa9VkYGbUqIl6Rx8oU+2FmdL9tqWn+feXJuFXqQn3ojZ+zqUH6084Nli3LxcvnZzc46zxLG28e22xbpvpSmdPSa+pm2kzJWQR5kr3SLtmVRW6utuTMVqmqlcnKHRpPdOmigZkAz/Bs9oQ/48/xHvae8LZ+7z2vIih0br3U/cMr78ruaBy7kqDPXLk3MqVSqRBwQXJXdmPuaeg4zYyoHW21RLdWNjybLQ4ehY5dSOazLYmA1BzfYvOtKyZFkEtq3nKuh2TeJMmptL9JNq+MqjRIBRebnKm9eXChoOUaz8K5IYDpXm9z/SeJ9FHyf5HRwetV4KZX88MlI7c5wcVHyrxp1Z+tdJP+vzNjPy9drDk+5LMW0oguX8qfjJQ7HKQ9M/IEaMPyfLLce7gXc3ugr/jJl8V/k2nfaH6VdWjn8vq4dHVp7MUT5NzP2KJNajJmpHL3/ip3envtO9Ot4u1rm9g+hc/QnyQ/kDgoVZZMey/7Kdvj2z2/Mj1TZ/P9ruZZtu2XhI9Bv6fkTQOHdaTuqXyTUfJ1e8bn/MEr1lZtrJWSfDPjffTwXafBja2//f66zzF75lZtvLeXOrrw7UDkgMOH+qf6m9VB6SwHRqWVdIAyL/MVrJW7tteYetYWwBgU8khIG8yl9WrY7vlzz4Nb30s95mR7P4bF1/7rrd/2PMozuRN/bSPcfTVWfEfa2uuk2S95lUmzjY1NWOKqa+8RAGqvgX4exOF/vqzpWv3AgSXDoFSNASGy5Aleg4ihPYg43qBKutyt1CETZFFAVT5AkCkfAOV8CAwKT9kif4LEZp/kKWagmp8u0cKZVWbA6NR9GBfUDnqg+HXjdd/xeLWGo7qXfYnslR5yOI0Wb9gj9zHFXIvctUAgamDM3gbti3BwFSj07hUHfZJEvK+KXbUjTb6YchQyAPWC6g4pBfsndUmtforVLhpGVwyVZL/hJiojg4ysbQG+WLpa02dC17cFXJKBXxWwEgHnGEItXqFgCH/pBpyVKxsURrsJWizUNcSj2/rrvMhAJX2KSVKGJFIhMhEIRzs3m/dTZS6yMYjz5WNlGu5WfERTmfOsM6ELPdoBAAAAA==') format('woff2'),
-  url('//at.alicdn.com/t/font_1500957_lsq8ycxkg4.woff?t=1573481155814') format('woff'),
-  url('//at.alicdn.com/t/font_1500957_lsq8ycxkg4.ttf?t=1573481155814') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url('//at.alicdn.com/t/font_1500957_lsq8ycxkg4.svg?t=1573481155814#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('//at.alicdn.com/t/font_1500957_ttuwkzq0v4m.eot?t=1573567203445'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_1500957_ttuwkzq0v4m.eot?t=1573567203445#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAeQAAsAAAAADiQAAAdEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCEIAqOCIs9ATYCJAMoCxYABCAFhG0Hdhv5CyOSD1KR7C8S4oD7w0prMdLbl8uW680u9T9WqyneXiP5zSami0lMfCYePtba+7unFpEkVuKRxKNqonpoEBKJ1gmFIZ6GzHA8bvqXBM2jhArQiVMxh5kmsDkzZ+bJvpPNI820YjATQ764k+ZmAL7fWh5QW1lhIsyiPFvy6Af+7HL2JTnKAYL/+fZzdWJ1b6Hoob8tFGIk3p/fzBy3UJYgVEL6H9MbeIPQCBlChNwwkc6/vLDWUwbiaQIlU5ZF93Ntj06GMAQ67rurEzrmlJkiDAVLbsyNGYgPUCskb+APgXf/8zGWGzqQyKYgLtx65Vy1Hu5jI6zxlgHq9fmR0JFiGZnE/DXW9gnGqESp0lSVh0BHg1CG/oJcheoMMN5y+90/wpjlRf/QkTPJSiXyx5zPySjG/7wchMYKuE+G4hlWa4IsvVyClF4hQUKvjiBPbwBB0BtPViG95UBCV28/CDL07jsVwS5N7WCaZBXmb3DXiiEruWP9IScxkgmtPlVNphq7LTXJYNDrY2JVzpZuEjaDni5IIm22NSTGSV4BkEbMigiBmJcxDH0eJ011OWlAZkpxtOCzuuQxwAZIgzeEEVwYRfEJohKXLFikQclTwN+evfkFhnHWKrl1LDONxJYMd46SeTMjsmueOy+UXQlzoVDgDVCzwYpzJYHhTwM0ag4HI/rxPLoVzPVCodDifr2rU8MEAnSircBYMx6r77AZ2vydJ3KyLJoniDofJcvWScUU0cUKcaQkbc0ukTvuigNOzckIYbsPIMT7gKkX3TgreKXdTcq8SPeEFkL2zT35FJfwL7jndNtl7gp/ib04dotYbDAjyDCusOtIGAuFxgRo2hmSdozbRcTvHh2w4ygwPvI+tmN7n+TnDiAXefIie6kAnbnCXV5luB3qrW4O90OiyAok2XIxXrX30imZcqWHetflRNK7Y8h6mPleqobAHEbuNrmjMV6EgIsxcJE1SuTS5JIq/O7Jp5933/+i6NSzbnueOls6WB9/gPOPKEzyk8bOm0LCxUTmU9BgnqBcSqDwPtIotVmcU9uvdHHt7k8LHXHzxlK8uETmLE7Je4HzrDlF5K9dQDTji/llGTtNdnPFsH1y6kR7uXDe9Jwm12qDBHZL5TBKXoDJ0LtkLgdT/vgDvWt5F7mDjyyPEMODv1fX1jqdNbU9C4u67H5duXOnvvcbZjLFNnCe3e22v3OD7bsluTMurNhxI+qdRCZR4zgS+2vp/NdnFyrNzRs2tLSszc8HXl0kjzDOSAbZ1XfPD+7yEjUzZZpHiYcOnZbigU7FfDOpl0bjnI8uXIc5stOy5tLMrMwmfZy+iWw00x9Ly8YcVNuFw90c5zZCnONqxy3bMEbXs6eG/o2Q+7xf934Q09GzMbsjpls/rfdDn6ZbX9X06sbq6aoYS6N8uKvfcq3P/bXbpy3UKbptWgUwfJPnK49CKbqwTfO9ZZv1e6vtTa1PJf2pVSif1hZ8lNKo6dMrYGqa4H8Sy4yUsuR9DXmFGJ3XvYafPIm/ltd9XHv5hEmbZu0OIGBH386p8/DXTp6c+lF6Xb+5y4+EMIQhVd5wujR11sgRM1OXKuhgd5BSBpq3ne19FmaajUZ7d7vxJGWxqRNZJ7P//4qUJ3tG+v2vfbH2t2yHI84eawbPwRsemh8i/Ec/ZQd/z9/ID13K/yOOxvQ04DkOR6w9DvWZmi/J90jQGl/LtS4l30WA07Yt3fYuCehH37Z0qoYeA8qGowqJlKMNCiKV1PrhD9NkYHh9w6iJDcz0LzGX69dzydAFoZ/yGr6zfNeQZ8juwsDEL34E9Gt+H8HVrDQ06L+0T94a2vvR0OW9HqXVHcPTcrPn6ndD4Y+hmO07aIo2ZAftiijfYz7TGXV+T6LngDbyf8a8N+zL+8Rnae3f00GdSXfenei5MJYd7D3goBw7tttNdtPkMMGGqyBoiQXcByLH/YuHveQZD5EleW4Zkeu7qlrOAAAg9rHt3L+cqKIySyI6L2s+/iNxEvhCkzMnUeW/ndD/xr63fnznkzAZYYP1hHXwF7kJfhLUc25S1VqByGbPoDW/PK6l8Ak34qxKAoggGgPvr9tsnlv922M29wBOqxsg6NiYKm46UEPygYZOFSClQb/bkVhYDAQsoweAVHglABgTHAE4oyuAYIJHTBX3PaBmge+AhgkjQCPJGa+YSGJ0z28CZ4jkH9QFnpPy2HO78xvNZXTSr/Xif4h2GarycrDyhRmyjkv02tRmiZLwRJ/B8zCOTItwj2B5a7aciyKNuzQPPK2e1RHgmB0dEe+h2AnYLPU3z0Pf/w0aFyNHpixbKf4DobrDk0qunIP5ZZznWnZfpqqrRs3In5CeK9iEfJIfRllkZBl/XA8Ck2uXyC/OCtouzWvMt2+ebm3tv8wK4qOeI4k0MpGNXOSjEMUoRRlxEuMOsbOXcFHjKbNTIXsTp+1x9FSB6pNevA49KNieJUJ2wYntlMVWKw==') format('woff2'),
+  url('//at.alicdn.com/t/font_1500957_ttuwkzq0v4m.woff?t=1573567203445') format('woff'),
+  url('//at.alicdn.com/t/font_1500957_ttuwkzq0v4m.ttf?t=1573567203445') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_1500957_ttuwkzq0v4m.svg?t=1573567203445#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -19,6 +19,10 @@
   content: "\e649";
 }
 
+.icon-edit:before {
+  content: "\e636";
+}
+
 .icon-custom-user:before {
   content: "\e632";
 }
@@ -27,8 +31,16 @@
   content: "\e69f";
 }
 
+.icon-address:before {
+  content: "\e61f";
+}
+
 .icon-substract:before {
   content: "\e676";
+}
+
+.icon-order:before {
+  content: "\e643";
 }
 
 .icon-cart:before {

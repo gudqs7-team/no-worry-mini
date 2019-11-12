@@ -327,14 +327,17 @@ page{
   z-index: 100;
 }
 
-.user-btn {
-  overflow: hidden;
-}
 
-.user-btn .icon {
+.user-btn-view .user-btn {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   color: white;
-  font-size: 2.2em;
-  background: #128FFA;
+  background: #1A6EDC;
   border-radius: 50%;
-  padding: 6rpx 10rpx;
+  text-align: center;
+  z-index: 999;
+}
+.user-btn .icon-custom-user {
+  font-size: 1.8em;
 }

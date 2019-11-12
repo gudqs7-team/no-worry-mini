@@ -1,0 +1,17 @@
+<!--pages/user/user.wxml-->
+<view id="userhead" bindlongtap="showUserTip" bindtap="showUserTip">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+</view>
+<view id="menu">
+  <view class='menu-item' bindtap="goAddress">
+    <text class="iconfont icon-address"></text>
+    我的地址
+  </view>
+  <view class='menu-item' bindtap="goOrder">
+    <text class="iconfont icon-order"></text>
+    全部订单
+  </view>
+</view>

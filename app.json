@@ -1,6 +1,9 @@
 {
   "pages": [
-    "page/index/index"
+    "page/index/index",
+    "page/user/user",
+    "page/order/order",
+    "page/user/address/address"
   ],
   "window": {
     "navigationBarTextStyle": "black",

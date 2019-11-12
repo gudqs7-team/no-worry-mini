@@ -106,7 +106,7 @@
 
     <view class="user-btn-view" bindtap="goUserPage">
       <view class="user-btn">
-        <text class="iconfont icon-custom-user icon"></text>
+        <text class="iconfont icon-custom-user cart-icon"></text>
       </view>
     </view>
 

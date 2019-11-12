@@ -234,3 +234,9 @@ input {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+.empty-height-view {
+  height: 100rpx;
+  width: auto;
+}
