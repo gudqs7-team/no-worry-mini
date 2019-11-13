@@ -1,0 +1,150 @@
+/* page/order/confirm/confirm.wxss */
+page {
+  background: #F2F2F2;
+}
+.my-card {
+  margin: 20rpx;
+  padding: 25rpx;
+  background: #FEFFFF;
+  box-shadow: 0px 0px 2px 1px #ececec;
+}
+
+.addr-view .addr-head {
+  overflow: hidden;
+}
+
+.addr-view .addr-head .head-text{
+  overflow: hidden;
+  width: 550rpx;
+  height: 60rpx;
+  float: left;
+  font-size: 39rpx;
+  font-weight: bold;
+  color: #262626;
+}
+.addr-view .addr-head .head-icon {
+  width: 100rpx;
+  height: 60rpx;
+  float: right;
+  position: relative;
+  color: #B7B7B7;
+}
+.addr-view .addr-head .head-icon text {
+  position: absolute;
+  top: 5rpx;
+  right: 10rpx;
+  font-size: 1.0em;
+}
+
+.addr-view .addr-user{
+  font-size: 25rpx;
+  color: #737373;
+}
+
+.goods-list {
+
+}
+
+.goods-view .goods-head {
+  font-size: 37rpx;
+  color: #262626;
+  font-weight: blod;
+  padding-bottom: 25rpx;
+  border-bottom: 1px solid #F6F7F7;
+}
+
+.goods-list {
+  margin-top: 10rpx;
+}
+
+.goods-list .goods-item {
+  margin: 10rpx 0;
+  overflow: hidden;
+}
+.goods-item .goods-left {
+  float: left;
+  overflow: hidden;
+}
+.goods-item .goods-right {
+  float: right;
+  overflow: hidden;
+}
+
+.goods-left .goods-img {
+  float: left;
+}
+.goods-img image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.goods-left .goods-text {
+  float: left;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #2F2F2F;
+}
+
+.goods-right .goods-count {
+  float: left;
+  line-height: 100rpx;
+  font-size: 25rpx;
+  color: #363636;
+  margin-right: 50rpx;
+}
+.goods-right .goods-price {
+  float: left;
+  line-height: 100rpx;
+  font-size: 27rpx;
+  color: #262626;
+}
+.goods-price .price-prefix {
+  font-size: 23rpx;
+}
+
+.goods-total {
+  padding-top: 20rpx;
+  border: 1px solid #FAFBFB;
+  text-align: right;
+  font-size: 33rpx;
+  font-weight: bold;
+  color: #262626;
+}
+.goods-total .total-title {
+  font-size: 25rpx;
+  color: #444444;
+  margin-right: 20rpx;
+}
+.goods-total .price-prefix {
+  font-size: 25rpx;
+}
+
+.order-bottom {
+  position: fixed;
+  bottom: 0;
+  height: 100rpx;
+  width: 100%;  
+  background: #2E2E2E;
+}
+.order-bottom-ipx {
+  height: 240prx;
+  padding-bottom: 40rpx;
+}
+
+.order-bottom .order-price {
+  position: absolute;
+  top: 10rpx;
+  left: 50rpx;
+  font-size: 42rpx;
+  color: #FCFEFE;
+}
+.order-bottom .order-btn {
+  position: absolute;
+  top: 5rpx;
+  right: 190rpx;
+  width: 70rpx;
+
+}
+.order-bottom .order-btn button{
+  width: 250rpx;
+  margin: 5rpx 0;
+}

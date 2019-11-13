@@ -289,6 +289,7 @@ Page({
       snackId: id,
       snackName: snack.snackName,
       snackPrice: snack.snackPrice,
+      snackPic: snack.snackPic,
       count: 1
     };
     req.post('/api/snack/car/add', car, function(data){
@@ -392,8 +393,14 @@ Page({
       return false;
     }
     console.log('order');
+    wx.navigateTo({
+      url: '/page/order/confirm/confirm'
+    });
   },
   goUserPage(e) {
+    if (!this.checkLogin()) {
+      return false;
+    }
     console.log('gouser ', e)
     wx.navigateTo({
       url: '/page/user/user'

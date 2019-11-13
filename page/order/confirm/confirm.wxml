@@ -1,0 +1,67 @@
+<!--page/order/confirm/confirm.wxml-->
+<view class="confirm-page">
+  <view class="addr-view my-card">
+    <view class="addr-head">
+      <view class="head-text">
+        {{defaultAddr}}
+      </view>
+      <view class="head-icon">
+        <text class="iconfont icon-right"></text>
+      </view>
+    </view>
+    <view class="addr-user">
+      <text>{{contactName}}  {{contactPhone}}</text>
+    </view>
+  </view>
+
+  <view class="goods-view my-card">
+    <view class="goods-head">
+      解忧零食铺
+    </view>
+    
+    <view class="goods-list">
+      <view wx:for="{{goods}}" wx:for-item="good" wx:key="0" class="goods-item">
+        <view class="goods-left">
+          <view class="goods-img">
+            <image src="{{good.snackPic}}"></image>
+          </view>
+          <view class="goods-text">
+            <view class="text-title">
+              {{good.snackName}}
+            </view>
+          </view>
+        </view>
+        
+        <view class="goods-right">
+          <view class="goods-count">x{{good.count}}</view>
+          <view class="goods-price"><text class="price-prefix">¥ </text>{{good.snackPriceText}}</view>
+        </view>
+      
+      </view>
+
+      <view class="goods-total">
+        <text class="total-title">小计</text>
+        <text class="goods-total"><text class="price-prefix">¥ </text>{{totalPriceText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="order-memo my-card">
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+      <mp-cell title="订单备注" ext-class="">
+        <input value="{{orderMemo}}" class="weui-input" placeholder="请输入订单备注" />
+      </mp-cell>
+    </mp-form>
+  </view>
+
+  <view class="empty-height-view"></view>
+  <view class="empty-height-view"></view>
+
+  <view class="order-bottom {{ isIpx ? 'order-bottom-ipx' : '' }}">
+    <view class="order-price">¥{{totalPriceText}}</view>
+    <view class="order-btn">
+      <button class="weui-btn" type="primary" bindtap="submitForm">立即支付</button>
+    </view>
+  </view>
+
+</view>

@@ -65,6 +65,13 @@
 					"id": -1,
 					"name": "page/user/address/address",
 					"pathName": "page/user/address/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page/order/confirm/confirm",
+					"pathName": "page/order/confirm/confirm",
 					"scene": null
 				}
 			]

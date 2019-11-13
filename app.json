@@ -3,7 +3,8 @@
     "page/index/index",
     "page/user/user",
     "page/order/order",
-    "page/user/address/address"
+    "page/user/address/address",
+    "page/order/confirm/confirm"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -5,10 +5,10 @@
       <view class="addr-item">
         <view class="left-info">
           <view class="item-head">
-            {{addr.area}}
+            {{addr.detailAddress}}
           </view>
           <view class="item-body">
-            {{addr.detailAddress}}
+            {{addr.area}}
           </view>
           <view class="item-footer">
             {{addr.contactName}} {{addr.contactPhone}}
