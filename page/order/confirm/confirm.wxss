@@ -124,6 +124,7 @@ page {
   height: 100rpx;
   width: 100%;  
   background: #2E2E2E;
+  z-index: 100;
 }
 .order-bottom-ipx {
   height: 240prx;

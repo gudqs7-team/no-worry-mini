@@ -9,39 +9,34 @@ Page({
     contactName: '李四',
     contactPhone: '18943218879',
     goods: [
-      {
-        snackName: '怡宝 550ml',
-        snackPrice: 100,
-        snackPriceText: '1.0',
-        count: 3,
-        snackPic: 'https://baidu.com'
-      }, {
-        snackName: '怡宝 550ml',
-        snackPrice: 100,
-        snackPriceText: '1.0',
-        count: 3,
-        snackPic: 'https://baidu.com'
-      }, {
-        snackName: '怡宝 550ml',
-        snackPrice: 100,
-        snackPriceText: '1.0',
-        count: 3,
-        snackPic: 'https://baidu.com'
-      }
     ],
     totalPrice: 300,
     totalPriceText: '3.0',
-    orderMemo: ''
+    orderMemo: '',
+    choseAddressId: 0
   },
   onLoad: function (options) {
+    this.initAddressInfo();
     this.initCarGoods();
+  },
+  initAddressInfo() {
+    var that = this;
+    
+    req.post('/api/user/userAddress/getDefault', {}, function(data) {
+      that.setData({
+        defaultAddr: data.area + data.detailAddress,
+        contactName: data.contactName,
+        contactPhone: data.contactPhone,
+        choseAddressId: data.addressId
+      });  
+    });
   },
   initCarGoods() {
     wx.showLoading({
       title: 'Loading....',
     });
     var that = this;
-    var carList = that.data.goods || [];
+    var carList = [];
     var sumPrice = 0;
     req.post('/api/snack/car/list', {}, function(data) {
       wx.hideLoading();
