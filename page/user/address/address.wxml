@@ -2,7 +2,7 @@
 
   <scroll-view class='addr-list' scroll-y style="height: {{height}}rpx">
     <block wx:for="{{addressList}}" wx:for-item="addr" wx:key="0">
-      <view class="addr-item">
+      <view class="addr-item" bindtap="choseAddr" data-id="{{addr.addressId}}">
         <view class="left-info">
           <view class="item-head">
             {{addr.detailAddress}}
@@ -14,11 +14,14 @@
             {{addr.contactName}} {{addr.contactPhone}}
           </view>
         </view>
-        <view class="right-btn">
+        <view class="right-btn" catchtap="goEditAddress" data-id="{{addr.addressId}}">
           <text class="iconfont icon-edit"></text>
         </view>
       </view>
     </block>
+    <view class="empty-list-tip" wx:if="{{ addressList !=null && addressList.length == 0 }}">
+      暂无地址, 赶紧添加一个吧
+    </view>
     <view class="empty-height-view"></view>
     <view class="empty-height-view"></view>
   </scroll-view>

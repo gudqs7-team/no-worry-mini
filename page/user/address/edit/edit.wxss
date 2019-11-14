@@ -1,0 +1,7 @@
+/* page/user/address/edit/edit.wxss */
+
+.tips {
+  margin: 20rpx;
+  font-size: 30rpx;
+  color: #A8A8A8;
+}

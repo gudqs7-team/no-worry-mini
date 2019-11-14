@@ -16,13 +16,18 @@ Page({
     choseAddressId: 0
   },
   onLoad: function (options) {
-    this.initAddressInfo();
+    this.initAddressInfo(0);
     this.initCarGoods();
   },
-  initAddressInfo() {
+  initAddressInfo(addressId) {
     var that = this;
-    
-    req.post('/api/user/userAddress/getDefault', {}, function(data) {
+    var url = '/api/user/userAddress/getDefault';
+    var data = {};
+    if (addressId !== 0) {
+      url = '/api/user/userAddress/get';
+      data = { id: addressId }
+    }
+    req.post(url, data, function(data) {
       that.setData({
         defaultAddr: data.area + data.detailAddress,
         contactName: data.contactName,
@@ -57,5 +62,17 @@ Page({
         totalPriceText: (sumPrice / 100).toFixed(1)
       });
     });
+  },
+  goChoseAddr(e){
+    var that = this;
+    wx.navigateTo({
+      url: '/page/user/address/address?choseId=' + this.data.choseAddressId,
+      events: {
+        choseId: function (data) {
+          var id = data.id;
+          that.initAddressInfo(id);
+        }
+      }
+    })
   }
 })

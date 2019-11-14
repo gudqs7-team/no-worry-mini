@@ -1,0 +1,32 @@
+<view class="edit-page">
+
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells title="编辑地址" footer="">
+      <mp-cell title="联系人" ext-class="">
+          <input value="{{contactName}}" bindinput="inputChange" data-name="contactName" class="weui-input" placeholder="请输入联系人姓名"/>
+      </mp-cell>
+      <mp-cell title="手机号" ext-class="">
+          <input value="{{contactPhone}}" bindinput="inputChange" data-name="contactPhone" class="weui-input" placeholder="请输入联系人手机号"/>
+      </mp-cell>
+      
+      <mp-cell title="宿舍栋数" ext-class="">
+          <input value="{{detailCount}}" bindinput="inputChange" data-name="detailCount" class="weui-input" placeholder="请输入宿舍栋数"/>
+      </mp-cell>
+      <mp-cell title="宿舍门号" ext-class="">
+          <input value="{{detailDoor}}" bindinput="inputChange" data-name="detailDoor" class="weui-input" placeholder="请输入宿舍门号"/>
+      </mp-cell>
+      
+    </mp-cells>
+    <mp-cells title="">
+      <mp-checkbox-group prop="checkbox" multi="true" bindchange="changeDefaultAddress">
+          <mp-checkbox label="设为默认地址" value="1" checked="{{defaultAddress == 1}}"></mp-checkbox>
+      </mp-checkbox-group>
+    </mp-cells>
+  </mp-form>
+  <view class="tips">
+    TIPS: 栋数直接填数字或填 xx 栋都可以
+  </view>
+  <view class="empty-height-view"></view>
+  <button class="weui-btn" type="primary" bindtap="save">确定</button>
+
+</view>

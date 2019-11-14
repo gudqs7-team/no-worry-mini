@@ -20,7 +20,9 @@
               <view class="type-head-filter">
                 <view class="weui-flex">
                   <view bindtap="sortBySales" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackSale' ? 'active' : '' }}">销量</view></view>
-                  <view bindtap="sortByPrice" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackPrice' ? 'active' : '' }}">价格</view></view>
+                  <view bindtap="sortByPrice" data-id="{{typeId}}" class="weui-flex__item">
+                    <view class="filter-item {{ sortBy[typeId] == 'snackPrice' ? 'active' : '' }}">价格<text class="iconfont icon-sort"></text></view>
+                  </view>
                 </view>
               </view>
             </view>

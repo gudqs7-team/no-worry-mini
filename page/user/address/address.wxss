@@ -23,7 +23,7 @@
   float: right;
   height: 180rpx;
   position: absolute;
-  top: 70rpx;
+  top: 50rpx;
   right: 30rpx;
 }
 
@@ -62,4 +62,12 @@
 }
 .add-new-ipx {
   height: 80rpx;
+}
+
+.empty-list-tip {
+  width: 100%;
+  text-align: center;
+  margin: 120rpx auto;
+  color: #6D6D6D;
+  font-size: 30rpx;
 }

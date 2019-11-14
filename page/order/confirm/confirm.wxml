@@ -1,7 +1,7 @@
 <!--page/order/confirm/confirm.wxml-->
 <view class="confirm-page">
   <view class="addr-view my-card">
-    <view class="addr-head">
+    <view class="addr-head" bindtap="goChoseAddr">
       <view class="head-text">
         {{defaultAddr}}
       </view>

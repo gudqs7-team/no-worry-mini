@@ -4,7 +4,8 @@
     "page/user/user",
     "page/order/order",
     "page/user/address/address",
-    "page/order/confirm/confirm"
+    "page/order/confirm/confirm",
+    "page/user/address/edit/edit"
   ],
   "window": {
     "navigationBarTextStyle": "black",
