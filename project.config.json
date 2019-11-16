@@ -88,6 +88,13 @@
 					"pathName": "page/order/detail/detail",
 					"query": "id=30",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page/order/order",
+					"pathName": "page/order/order",
+					"query": "id=30",
+					"scene": null
 				}
 			]
 		}

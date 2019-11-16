@@ -13,9 +13,9 @@ var ajax = function(options, retry) {
       return;
     }
     setTimeout(function(){
-      console.log('retry: ', retry || 0)
+      console.log('retry: ', retry || 0, url)
       ajax(options, (retry || 0 ) + 1);
-    }, 300)
+    }, 500)
     return;
   }
   var reqData = options.data || {};
