@@ -8,7 +8,7 @@ App({
     global.height = sys.windowHeight;
     global.width = sys.windowWidth;
     global.isIpx = sys.model.indexOf('iPhone X') !== -1;
-    global.maxCartCount = 10;
+    global.maxCartCount = 99;
     
     this.initLogin();
   },

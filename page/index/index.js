@@ -4,7 +4,7 @@ var app = getApp();
 Page({
   data: {
     width: global.width,
-    height: (global.height - 48) * 2 - 100,
+    height: (global.height) * 2 - 200,
     isIpx: global.isIpx,
     maxCartCount: global.maxCartCount,
     startPriceFen: 50,
@@ -35,7 +35,8 @@ Page({
     },
     sortBy: {
 
-    }
+    },
+    searchName: ''
   },
   onShow() {
     var that = this;
@@ -72,7 +73,59 @@ Page({
         }
       });
     }
+
+    this.setData({
+      search: this.search.bind(this)
+    })
+  },
+  search(value) {
+    console.log('search: ', value);
+    return new Promise((resolve, reject) => {
+      var backList = [{
+        text: value,
+        value: value
+      }];
+      // req.getOther('https://suggest.taobao.com/sug?code=utf-8&q='+value+'&area=b2c&code=utf-8&k=1&bucketid=9&src=tmall_pc', {}, function(){}, function(data) {
+      //   var sugs = data.result;
+      //   var max = sugs.length < 3 ? sugs.length : 3;
+      //   for (var i = 0; i < max; i++) {
+      //     var sug = sugs[i];
+      //     var sugVal = sug[0];
+      //     backList.push({
+      //       text: sugVal,
+      //       value: sugVal
+      //     });
+      //   }
+      // });
+      resolve(backList);
+    });
+  },
+  selectResult(e){
+    console.log('select: ', e);
+    var item = e.detail.item;
+    var name = item.value;
+    this.setData({
+      searchName: name
+    });
+    var typeList = this.data.typeList;
+    var typeMap = this.data.typeMap;
+
+    var type = {
+      snackTypeId: -1,
+      snackTypeName: '搜索结果'
+    };
+    if (!typeMap['-1']) {
+      typeList.push(type);
+    }
     
+    typeMap['-1'] = type.snackTypeName;
+    this.setData({
+      typeList: typeList,
+      typeMap: typeMap,
+      activeTypeId: -1
+    });
+    this.initTypeGoods(-1);
+    e.detail.obj.hideInput();
   },
   initCart(data) {
     var that = this;
@@ -114,10 +167,10 @@ Page({
       cartTypeMap: cartTypeMap
     })
   },
-  initTypeGoods(typeId, searchName) {
+  initTypeGoods(typeId) {
     var goods = this.data.goods || {};
     var goodsData = goods[typeId];
-    if (goodsData && goodsData.length > 0) {
+    if (goodsData && goodsData.length > 0 && typeId !== -1) {
       this.setData({
         goodsToView: 'type-' + typeId
       });
@@ -125,22 +178,24 @@ Page({
     }
     this.initGoods(typeId);
   },
-  initGoods(typeId, search) {
+  initGoods(typeId) {
     var that = this;
     wx.showLoading({
       title: 'Loading',
     });
 
-    var reqData = {
-      snackTypeId: typeId
-    };
+    var reqData = {};
+    if (typeId && typeId != -1) {
+      reqData.snackTypeId = typeId;
+    }
     var sortBy = that.data.sortBy[typeId] || 'displayOrder';
     var desc = that.data.desc[typeId] || '0';
     reqData.sortBy = sortBy;
-    reqData.desc = desc === '1';
+    reqData.desc = desc == '1';
 
-    if (search) {
-      reqData.snackName = search;
+    var search = this.data.searchName;
+    if (search && typeId == -1) {
+      reqData.snackName = search.trim();
     }
     req.post('/api/snack/snack/list', reqData, function (data) {
       var goods = that.data.goods || {};
@@ -189,12 +244,27 @@ Page({
     var descMap = that.data.desc;
     var sortBy = that.data.sortBy[typeId];
     var desc = that.data.desc[typeId];
-    var descbool = desc === '1';
+    var descbool = desc == '1';
+
+    var nextDesc = '0';
+    if (desc) {
+      var ascbool = desc == '0';
+      if (ascbool && sortBy != 'displayOrder') {
+        nextDesc = '1';
+      }
+    }
+
+    var nextSort = 'snackPrice';
+    if (sortBy) {
+      if ((sortBy == 'snackPrice') && (desc == '1')) {
+        nextSort = 'displayOrder';
+      }
+    }
     
-    var cancelSort = sortBy === 'snackPrice' && descbool
+    console.log('sort price: ', sortBy, desc, nextSort, nextDesc);
     
-    sortByMap[typeId] = cancelSort ? 'displayOrder' : 'snackPrice';
-    descMap[typeId] = descbool ? '0' : '1';
+    sortByMap[typeId] = nextSort;
+    descMap[typeId] = nextDesc;
     this.setData({
       sortBy: sortByMap,
       desc:  descMap

@@ -199,7 +199,7 @@ Component({
             var index = e.currentTarget.dataset.index;
 
             var item = this.data.result[index];
-            this.triggerEvent('selectresult', { index: index, item: item });
+          this.triggerEvent('selectresult', { index: index, item: item, obj: this });
         }
     }
 });

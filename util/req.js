@@ -1,6 +1,6 @@
 
-var reqHost = 'https://wap.jzxcxin.xyz/noworry';
-// var reqHost = 'http://localhost:9797';
+// var reqHost = 'https://wap.jzxcxin.xyz/noworry';
+var reqHost = 'http://localhost:9797';
 
 var app = getApp();
 
@@ -19,9 +19,12 @@ var ajax = function(options, retry) {
     return;
   }
   var reqData = options.data || {};
-
+  var reqUrl = reqHost + url;
+  if (options.realUrl) {
+    reqUrl = options.realUrl;
+  }
   wx.request({
-    url: reqHost + url,
+    url: reqUrl,
     method: options.method,
     header: {
       'content-type': 'application/x-www-form-urlencoded',
@@ -50,6 +53,16 @@ var ajax = function(options, retry) {
   })
 }
 
+var getOther = function(url, data, callback, success) {
+  ajax({
+    realUrl: url,
+    method: 'GET',
+    data: data,
+    callback: callback,
+    success: success
+  });
+}
+
 var get = function (url, data, callback, success) {
   ajax({
     url: url,
@@ -75,5 +88,6 @@ module.exports = {
   reqHost: reqHost,
   ajax: ajax,
   get: get,
-  post: post
+  post: post,
+  getOther: getOther
 }
