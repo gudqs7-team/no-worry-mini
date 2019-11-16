@@ -19,7 +19,7 @@
         </view>
       </view>
     </block>
-    <view class="empty-list-tip" wx:if="{{ addressList !=null && addressList.length == 0 }}">
+    <view class="empty-list-tip" wx:if="{{ init && (addressList !=null && addressList.length == 0) }}">
       暂无地址, 赶紧添加一个吧
     </view>
     <view class="empty-height-view"></view>

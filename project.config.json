@@ -81,6 +81,12 @@
 					"pathName": "page/user/address/edit/edit",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "page/order/detail/detail",
+					"pathName": "page/order/detail/detail",
+					"scene": null
 				}
 			]
 		}

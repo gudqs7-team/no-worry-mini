@@ -140,11 +140,13 @@ page {
 }
 .order-bottom .order-btn {
   position: absolute;
-  top: 5rpx;
-  right: 190rpx;
-  width: 70rpx;
+  top: 9rpx;
+  right: 5rpx;
+  overflow: hidden;
 }
 .order-bottom .order-btn button{
-  width: 250rpx;
-  margin: 5rpx 0;
+  width: 180rpx;
+  margin: 5rpx 10rpx;
+  display: inline-block;
+  padding: 15rpx 10rpx;
 }

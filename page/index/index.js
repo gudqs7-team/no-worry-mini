@@ -7,6 +7,7 @@ Page({
     height: (global.height - 48) * 2 - 100,
     isIpx: global.isIpx,
     maxCartCount: global.maxCartCount,
+    startPriceFen: 50,
     needLogin: false,
     loginNow: false,
     typeMap: {

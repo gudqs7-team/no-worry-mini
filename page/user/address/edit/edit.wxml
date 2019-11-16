@@ -27,6 +27,9 @@
     TIPS: 栋数直接填数字或填 xx 栋都可以
   </view>
   <view class="empty-height-view"></view>
-  <button class="weui-btn" type="primary" bindtap="save">确定</button>
+  <view class="save-btn">
+    <button class="weui-btn" type="primary" bindtap="save">确定</button>
+    <button wx:if="{{ addressId !== 0 }}" class="weui-btn" type="warn" bindtap="deleteAddr">删除</button>
+  </view>
 
 </view>

@@ -96,5 +96,58 @@ App({
   },
   getTokenByLocal(){
     return wx.getStorageSync('__token__');
+  },
+  payByOrderId(orderId){
+    var openId = global.user.openId;
+    req.post('/api/pay/makeOrder', {
+      orderType: 1,
+      otherOrderId: orderId,
+      openId: openId,
+      memo: '解忧零食铺外卖'
+    }, function (pay) {
+      wx.requestPayment({
+        timeStamp: pay.timeStamp || '',
+        nonceStr: pay.nonceStr || '',
+        package: pay.package || '',
+        signType: 'MD5',
+        paySign: pay.paySign || '',
+        success(res) {
+          wx.showToast({
+            title: '支付成功',
+          });
+          that.jumpDetail(orderId);
+        },
+        fail(res) {
+          wx.showToast({
+            title: '未支付',
+          });
+          that.jumpDetail(orderId);
+        }
+      })
+    });
+  },
+  jumpDetail(id) {
+    wx.navigateTo({
+      url: '/page/order/detail/detail?id=' + id,
+    })
+  },
+  cancelOrder(id) {
+    var that = this;
+    wx.showModal({
+      title: '',
+      content: '确认取消订单吗?',
+      success(res) {
+        if (res.confirm) {
+          req.post('/api/user/buyOrder/cancel', {orderId: id}, function(data){
+            wx.showToast({
+              title: '取消成功!',
+            })
+            that.jumpDetail(id);
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   }
 })

@@ -8,10 +8,17 @@ Page({
     detailCount: '',
     detailDoor: '',
     defaultAddress: 0,
-    addressId: 0
+    addressId: 0,
+    needJump: false
   },
   onLoad: function (options) {
     var that = this;
+    if (options.form && options.form == 'order') {
+      that.setData({
+        needJump: true,
+        defaultAddress: 1
+      });
+    }
     console.log('load: ', options);
     var id = options.id;
     if (id) {
@@ -50,12 +57,36 @@ Page({
       title: '保存中...',
     });
     var that = this;
-    req.post('/api/user/userAddress/save', data, function(){
+    req.post('/api/user/userAddress/save', data, function(data){
       wx.hideLoading();
-      const eventChannel = that.getOpenerEventChannel()
-      eventChannel.emit('saveSuccess', { data: 'test' });
+      const eventChannel = that.getOpenerEventChannel();
+      if (eventChannel && eventChannel.emit) {
+        if (that.data.needJump) {
+          var id = data.addressId;
+          eventChannel.emit('choseId', { id: id });
+        } else {
+          eventChannel.emit('saveSuccess', { data: 'test' });
+        }
+      }
       wx.navigateBack({});
     });
+  },
+  deleteAddr(e) {
+    var that = this;
+    if (this.data.addressId !== 0) {
+      var addressId = this.data.addressId;
+      wx.showLoading({
+        title: '删除中...',
+      })
+      req.post('/api/user/userAddress/delete', {addressId: addressId}, function() {
+        wx.hideLoading();
+        const eventChannel = that.getOpenerEventChannel();
+        if (eventChannel && eventChannel.emit) {
+          eventChannel.emit('saveSuccess', { data: 'test' });
+        }
+        wx.navigateBack();
+      });
+    }
   },
   changeDefaultAddress(e) {
     var val = e.detail.value[0] || '0';

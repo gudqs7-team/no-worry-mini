@@ -6,9 +6,16 @@ Page({
     height: (global.height) * 2,
     isIpx: global.isIpx,
     addressList: [
-    ]
+    ],
+    canClick: false,
+    init: false
   },
   onLoad: function (options) {
+    if (options && options.choseId) {
+      this.setData({
+        canClick: true
+      });
+    }
     this.initAddrList();
   },
   initAddrList() {
@@ -19,7 +26,8 @@ Page({
     req.post('/api/user/userAddress/list', {}, function(data) {
       wx.hideLoading();
       that.setData({
-        addressList: data
+        addressList: data,
+        init: true
       })
     });
   },
@@ -50,6 +58,9 @@ Page({
     })
   },
   choseAddr(e){
+    if (!this.data.canClick) {
+      return false;
+    }
     var id = e.currentTarget.dataset.id;
     var that = this;
     console.log('chose addr')

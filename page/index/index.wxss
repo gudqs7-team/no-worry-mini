@@ -177,11 +177,11 @@ page{
 /* cart */
 
 .cart-ipx .cart-list {
-  bottom: 120rpx!important;
+  bottom: 140rpx!important;
 }
 .cart-ipx .cart-bottom {
-  padding-bottom: 20rpx;
-  height: 120rpx;
+  padding-bottom: 40rpx;
+  height: 140rpx;
 }
 
 .shadow {
@@ -251,6 +251,23 @@ page{
   padding: 15rpx 70rpx;
 }
 
+.cart-bottom .order-btn {
+  position: absolute;
+  top: 5rpx;
+  right: 190rpx;
+  width: 70rpx;
+  text-align: center;
+}
+.cart-bottom .order-btn button.inactive{
+  background: #6D6C6D;
+}
+.cart-bottom .order-btn button{
+  width: 250rpx;
+  margin: 5rpx 0;
+  padding: 0;
+  font-size: 35rpx;
+  padding-top: 15rpx;
+}
 .footer-cart .cart-list {
   position: absolute;
   bottom: 100rpx;

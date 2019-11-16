@@ -17,7 +17,7 @@
     <view wx:if="{{noAddress}}" class="no-address">
       <view class="addr-head" bindtap="goAddAddress">
         <view class="head-text">
-          添加地址
+          
         </view>
         <view class="head-icon">
           <text class="iconfont icon-right"></text>
@@ -60,8 +60,17 @@
 
   <view class="order-memo my-card">
     <mp-form id="form" rules="{{rules}}" models="{{formData}}">
-      <mp-cell title="订单备注" ext-class="">
-        <input value="{{orderMemo}}" data-name="orderMemo" bindinput="inputChange" class="weui-input" placeholder="请输入订单备注" />
+      <mp-cell title="订单备注:" ext-class="">
+        {{order.orderMemo}}
+      </mp-cell>
+      <mp-cell title="下单时间:" ext-class="">
+        {{order.createTime}}
+      </mp-cell>
+      <mp-cell title="订单号:" ext-class="">
+        {{order.tradeNo}}
+      </mp-cell>
+      <mp-cell title="订单状态:" ext-class="">
+        {{orderStatusMap[order.status]}}
       </mp-cell>
     </mp-form>
   </view>
@@ -69,10 +78,10 @@
   <view class="empty-height-view"></view>
   <view class="empty-height-view"></view>
 
-  <view class="order-bottom {{ isIpx ? 'order-bottom-ipx' : '' }}">
-    <view class="order-price">¥ {{totalPriceText}}</view>
+  <view wx:if="{{ order.status == 0 }}" class="order-bottom {{ isIpx ? 'order-bottom-ipx' : '' }}">
     <view class="order-btn">
-      <button class="weui-btn" type="primary" bindtap="goPay">立即支付</button>
+      <button wx:if="{{ order.status == 0 }}" class="weui-btn" type="default" bindtap="cancelOrder">取消订单</button>
+      <button wx:if="{{ order.status == 0 }}" class="weui-btn" type="primary" bindtap="goPay">立即支付</button>
     </view>
   </view>
 
