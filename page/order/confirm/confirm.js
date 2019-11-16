@@ -14,11 +14,22 @@ Page({
     totalPriceText: '0',
     orderMemo: '',
     choseAddressId: 0,
-    noAddress: true
+    noAddress: true,
+    doPay: false
   },
   onLoad: function (options) {
+    // this.initAddressInfo(0);
+    // this.initCarGoods();
+  },
+  onShow(e) {
+    console.log('show: ', e);
     this.initAddressInfo(0);
-    this.initCarGoods();
+    this.initCarGoods(function(data){
+      console.log('callback: ', data);
+      if (data.length <= 0 && !doPay){
+        wx.navigateBack();
+      }
+    });
   },
   initAddressInfo(addressId) {
     var that = this;
@@ -44,7 +55,7 @@ Page({
       }
     });
   },
-  initCarGoods() {
+  initCarGoods(callback) {
     wx.showLoading({
       title: 'Loading....',
     });
@@ -69,6 +80,9 @@ Page({
         totalPrice: sumPrice,
         totalPriceText: (sumPrice / 100).toFixed(1)
       });
+      if (callback) {
+        callback(data);
+      }
     });
   },
   goChoseAddr(e){
@@ -122,6 +136,9 @@ Page({
     wx.showLoading({
       title: 'Loading...',
     });
+    this.setData({
+      doPay: true
+    });
     var orderMemo = this.data.orderMemo;
     console.log('pay: ', addressId, orderMemo);
     req.post('/api/user/buyOrder/make', {
@@ -136,20 +153,21 @@ Page({
         openId: openId,
         memo: '解忧零食铺外卖'
       }, function(pay) {
-        wx.hideLoading();
         wx.requestPayment({
           timeStamp: pay.timeStamp || '',
           nonceStr: pay.nonceStr || '',
           package: pay.package || '',
           signType: 'MD5',
           paySign: pay.paySign ||'',
-          success(res){
+          success(res) {
+            wx.hideLoading();
             wx.showToast({
               title: '支付成功',
             });
             that.jumpDetail(orderId);
           },
-          fail(res){
+          fail(res) {
+            wx.hideLoading();
             wx.showToast({
               title: '未支付',
             });
@@ -160,7 +178,7 @@ Page({
     })
   },
   jumpDetail(id) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/page/order/detail/detail?id=' + id,
     })
   }

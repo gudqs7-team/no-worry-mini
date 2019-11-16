@@ -2,5 +2,7 @@
   "usingComponents": {
     "mp-cell": "../../../weui/cell/cell",
     "mp-form": "../../../weui/form/form"
-  }
+  },
+  "navigationBarTitleText": "订单详情",
+  "enablePullDownRefresh": true
 }

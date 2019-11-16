@@ -110,7 +110,7 @@
       </view>
     </mp-halfScreenDialog>
 
-    <view class="user-btn-view" bindtap="goUserPage">
+    <view class="user-btn-view {{isIpx ? 'user-ipx' : ''}}" bindtap="goUserPage">
       <view class="user-btn">
         <text class="iconfont icon-custom-user cart-icon"></text>
       </view>

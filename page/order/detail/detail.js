@@ -32,19 +32,29 @@ Page({
       return false;
     }
     var orderId = options.id;
+    this.setData({
+      orderId: orderId
+    });
+    this.initOrder(orderId);
+  },
+  onPullDownRefresh() {
+    var orderId = this.data.orderId;
+    this.initOrder(orderId);
+  },
+  initOrder(orderId){
     var that = this;
     wx.showLoading({
       title: 'Loading...',
     });
-    req.post('/api/user/buyOrder/get', {orderId: orderId}, function(data) {
+    req.post('/api/user/buyOrder/get', { orderId: orderId }, function (data) {
       wx.hideLoading();
+      wx.stopPullDownRefresh();
       that.setData({
         order: data
       });
       that.initAddressInfo(data.addressId);
       that.initCarGoods(data.orderDetails);
     });
-    
   },
   initAddressInfo(addressId) {
     var that = this;
@@ -93,16 +103,28 @@ Page({
   },
   goPay() {
     var orderId = this.data.order.orderId;
+    console.log('gopay: ', orderId);
     if (!orderId) {
       return false;
     }
-    app.payByOrderId(orderId);
+    var that = this;
+    app.payByOrderId(orderId, function(id, suss){
+      console.log('back: ', suss, id);
+      that.initOrder(orderId);
+      var msg = suss ? '已支付' : '未完成支付';
+      wx.showToast({
+        title: msg
+      });
+    });
   },
   cancelOrder() {
     var orderId = this.data.order.orderId;
     if (!orderId) {
       return false;
     }
-    app.cancelOrder(orderId);
+    var that = this;
+    app.cancelOrder(orderId, function(){
+      that.initOrder(orderId);
+    });
   }
 })

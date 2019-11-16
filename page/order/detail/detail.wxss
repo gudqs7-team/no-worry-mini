@@ -150,3 +150,9 @@ page {
   display: inline-block;
   padding: 15rpx 10rpx;
 }
+
+.tip {
+  color: #A9A9A9;
+  font-size: 30rpx;
+  margin: 20rpx 50rpx;
+}

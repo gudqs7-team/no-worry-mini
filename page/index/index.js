@@ -37,6 +37,16 @@ Page({
 
     }
   },
+  onShow() {
+    var that = this;
+    wx.showLoading({
+      title: 'Loading...',
+    })
+    req.post('/api/snack/car/list', {}, function (data) {
+      wx.hideLoading();
+      that.initCart(data);
+    });
+  },
   onLoad(e) {
     wx.showLoading({
       title: 'Loading...',
@@ -44,6 +54,7 @@ Page({
     var that = this;
     console.log('on load..', e);
     req.post('/api/snack/snackType/list', {}, function(data){
+      wx.hideLoading();
       that.initTypeMap(data);
       that.setData({
         typeList: data
@@ -51,10 +62,6 @@ Page({
       var typeId = that.data.activeTypeId;
       that.initTypeGoods(typeId, null);
     })
-    // init cart
-    req.post('/api/snack/car/list', {}, function(data){
-      that.initCart(data);
-    });
     console.log('load: ', global)
     if (global.user == null) {
       app.getOpenId(function(openId, user){
@@ -71,7 +78,7 @@ Page({
     var that = this;
     var sum = 0;
     var sumPrice = 0;
-    var cartSnackMap = this.data.cartSnackMap || {};
+    var cartSnackMap = {};
     for (var i = 0; i<data.length; i++) {
       var car = data[i];
       var count = car.count;

@@ -97,7 +97,8 @@ App({
   getTokenByLocal(){
     return wx.getStorageSync('__token__');
   },
-  payByOrderId(orderId){
+  payByOrderId(orderId, callback){
+    var that = this;
     var openId = global.user.openId;
     req.post('/api/pay/makeOrder', {
       orderType: 1,
@@ -105,6 +106,9 @@ App({
       openId: openId,
       memo: '解忧零食铺外卖'
     }, function (pay) {
+      wx.showLoading({
+        title: 'Loading...',
+      });
       wx.requestPayment({
         timeStamp: pay.timeStamp || '',
         nonceStr: pay.nonceStr || '',
@@ -112,16 +116,20 @@ App({
         signType: 'MD5',
         paySign: pay.paySign || '',
         success(res) {
-          wx.showToast({
-            title: '支付成功',
-          });
-          that.jumpDetail(orderId);
+          wx.hideLoading();
+          if (callback) {
+            callback(orderId, true);
+          } else {
+            that.jumpDetail(id);
+          }
         },
         fail(res) {
-          wx.showToast({
-            title: '未支付',
-          });
-          that.jumpDetail(orderId);
+          wx.hideLoading();
+          if (callback) {
+            callback(orderId, false);
+          } else {
+            that.jumpDetail(id);
+          }
         }
       })
     });
@@ -131,18 +139,26 @@ App({
       url: '/page/order/detail/detail?id=' + id,
     })
   },
-  cancelOrder(id) {
+  cancelOrder(id, callback) {
     var that = this;
     wx.showModal({
       title: '',
       content: '确认取消订单吗?',
       success(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: 'Loading...',
+          });
           req.post('/api/user/buyOrder/cancel', {orderId: id}, function(data){
+            wx.hideLoading();
             wx.showToast({
               title: '取消成功!',
-            })
-            that.jumpDetail(id);
+            });
+            if(callback){
+              callback(id);
+            } else {
+              that.jumpDetail(id);
+            }
           });
         } else if (res.cancel) {
           console.log('用户点击取消')
