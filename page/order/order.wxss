@@ -33,10 +33,28 @@ page {
   color: #727272;
 }
 .order-item .order-head {
+  position: relative;
   padding-bottom: 20rpx;
   border-bottom: 1px solid #F0F0F0;
   margin-bottom: 20rpx;
 }
+.head-right {
+  position: absolute;
+  right: 20rpx;
+  top: 15rpx;
+  font-size: 30rpx;
+  color: #6D6C6D;
+}
+.head-right.order-status-0 {
+  color: #977241;
+}
+.head-right.order-status-1 {
+  color: #19B84D;
+}
+.head-right.order-status-2 {
+  color: #6D6C6D;
+}
+
 .order-body {
   overflow: hidden;
   font-size: 30rpx;

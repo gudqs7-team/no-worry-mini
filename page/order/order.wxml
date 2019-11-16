@@ -1,10 +1,11 @@
 <view class="order-page">
   <view class="order-title">我的订单</view>
     <block wx:for="{{orderList}}" wx:for-item="order" wx:key="1">
-      <view class="order-item my-card">
+      <view class="order-item my-card" bindtap="jumpDetail" data-id="{{order.orderId}}">
         <view class="order-head">
           <view class="order-title"> 解忧零食铺 </view>
           <view class="order-time">{{order.createTime}}</view>
+          <view class="head-right order-status-{{order.status}}">{{orderStatusMap[order.status]}}</view>
         </view>
         <view class="order-body">
           <view class="body-left">

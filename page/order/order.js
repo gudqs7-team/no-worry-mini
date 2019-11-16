@@ -5,9 +5,15 @@ Page({
     width: global.width,
     isIpx: global.isIpx,
     orderList: [
-    ]
+    ],
+    orderStatusMap: {
+      '0': '未支付',
+      '1': '已支付',
+      '2': '已取消',
+      '3': '已退款'
+    }
   },
-  onLoad: function (options) {
+  onShow: function () {
     this.initOrderList();
   },
   onPullDownRefresh() {
@@ -35,5 +41,12 @@ Page({
     var id = e.currentTarget.dataset.id;
     console.log('cancel', id)
     app.cancelOrder(id);
+  },
+  jumpDetail(e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('jump detail', id, e);
+    wx.navigateTo({
+      url: '/page/order/detail/detail?id=' + id,
+    })
   }
 })

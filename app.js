@@ -120,7 +120,7 @@ App({
           if (callback) {
             callback(orderId, true);
           } else {
-            that.jumpDetail(id);
+            that.jumpDetail(orderId);
           }
         },
         fail(res) {
@@ -128,13 +128,14 @@ App({
           if (callback) {
             callback(orderId, false);
           } else {
-            that.jumpDetail(id);
+            that.jumpDetail(orderId);
           }
         }
       })
     });
   },
   jumpDetail(id) {
+    console.log('jump detail', id);
     wx.navigateTo({
       url: '/page/order/detail/detail?id=' + id,
     })
