@@ -2,7 +2,7 @@
     <view class="search-goods">
         <mp-searchbar throttle="100" bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
     </view>
-    <view class="empty-height-view"></view>
+    <view class="page-height-view"></view>
     <view class="page-body">
         <scroll-view scroll-y="true" class="left-type" style="height: {{height}}rpx">
           <block wx:for="{{typeList}}" wx:for-item="type" wx:key="1">

@@ -85,18 +85,18 @@ Page({
         text: value,
         value: value
       }];
-      // req.getOther('https://suggest.taobao.com/sug?code=utf-8&q='+value+'&area=b2c&code=utf-8&k=1&bucketid=9&src=tmall_pc', {}, function(){}, function(data) {
-      //   var sugs = data.result;
-      //   var max = sugs.length < 3 ? sugs.length : 3;
-      //   for (var i = 0; i < max; i++) {
-      //     var sug = sugs[i];
-      //     var sugVal = sug[0];
-      //     backList.push({
-      //       text: sugVal,
-      //       value: sugVal
-      //     });
-      //   }
-      // });
+      req.getOther('https://suggest.taobao.com/sug?code=utf-8&q='+value+'&area=b2c&code=utf-8&k=1&bucketid=9&src=tmall_pc', {}, function(){}, function(data) {
+        var sugs = data.result;
+        var max = sugs.length < 3 ? sugs.length : 3;
+        for (var i = 0; i < max; i++) {
+          var sug = sugs[i];
+          var sugVal = sug[0];
+          backList.push({
+            text: sugVal,
+            value: sugVal
+          });
+        }
+      });
       resolve(backList);
     });
   },

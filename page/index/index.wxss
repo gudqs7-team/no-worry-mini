@@ -16,16 +16,21 @@ page{
 .page-body .left-type , .page-body .right-goods {
   display: inline-block;
 }
-
+.page-height-view {
+  width: 100%;
+  height: 110rpx;
+}
 .right-goods {
-  width: 577rpx;
+  float: right;
+  width: 573rpx;
   margin: 0;
   padding: 0;
 }
 
 /* type */
 .left-type {
-  width: 170rpx;
+  float: left;
+  width: 173rpx;
   background: #F6F6F6;
 }
 
