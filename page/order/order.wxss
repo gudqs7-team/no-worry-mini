@@ -63,7 +63,7 @@ page {
   right: 0;
   bottom: 0;
   float: right;
-  height: 120rpx;
+  max-height: 120rpx;
   line-height: 120rpx;
 }
 
