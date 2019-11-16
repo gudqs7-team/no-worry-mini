@@ -1,2 +1,22 @@
-<!--page/order/order.wxml-->
-<text>page/order/order.wxml</text>
+<view class="order-page">
+  <view class="order-title">我的订单</view>
+    <block wx:for="{{orderList}}" wx:for-item="order" wx:key="1">
+      <view class="order-item my-card">
+        <view class="order-head">
+          <view class="order-title"> 解忧零食铺 </view>
+          <view class="order-time">{{order.createTime}}</view>
+        </view>
+        <view class="order-body">
+          <view class="body-left">
+            {{order.orderDetails[0].snackName}} 等 {{order.orderDetails.length}} 件
+          </view>
+          <view class="body-right"><text class="half-price">¥ </text>{{order.totalAmount / 100}}</view>
+        </view>
+        <view class="order-btn">
+          <button data-id="{{order.orderId}}" wx:if="{{ order.status == 0 }}" class="weui-btn" type="default" bindtap="cancelOrder">取消订单</button>
+          <button data-id="{{order.orderId}}" wx:if="{{ order.status == 0 }}" class="weui-btn" type="primary" bindtap="goPay">立即支付</button>
+        </view>
+      </view>
+    </block>
+
+</view>

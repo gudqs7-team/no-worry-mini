@@ -1,1 +1,75 @@
-/* page/order/order.wxss */
+page {
+  background: #F9F9F9;
+}
+
+.order-title {
+  font-size: 50rpx;
+  color: #262626;
+  margin: 20rpx 10rpx;
+}
+.my-card {
+  margin: 10rpx 20rpx;
+  padding: 25rpx;
+  background: #FEFFFF;
+  box-shadow: 0px 0px 2px 1px #ececec;
+}
+
+.order-item {
+  border-radius: 20rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-item .order-title {
+  font-size: 35rpx;
+  margin: 0;
+  padding: 0;
+  color: #2A2A2A;
+  padding-left: 10rpx;
+}
+.order-item .order-time {
+  font-size: 25rpx;
+  padding-left: 15rpx;
+  color: #727272;
+}
+.order-item .order-head {
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #F0F0F0;
+  margin-bottom: 20rpx;
+}
+.order-body {
+  overflow: hidden;
+  font-size: 30rpx;
+  color: #282828;
+}
+
+.order-body .body-left {
+  float: left;
+  padding-left: 10rpx;
+}
+
+.order-body .body-right {
+  float: right;
+  font-weight: bold;
+  padding-right: 15rpx;
+}
+
+.half-price {
+  font-size: 22rpx;
+}
+
+.order-btn {
+  overflow: hidden;
+  right: 0;
+  bottom: 0;
+  float: right;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+
+.order-btn button {
+  width: 220rpx;
+  padding: 15rpx 0;
+  margin: 0 10rpx;
+  display: inline-block;
+}

@@ -1,66 +1,39 @@
-// page/order/order.js
+var req = require("../../util/req.js");
+var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    width: global.width,
+    isIpx: global.isIpx,
+    orderList: [
+    ]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    this.initOrderList();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onPullDownRefresh() {
+    this.initOrderList();
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  initOrderList() {
+    wx.showLoading({
+      title: 'Loading...',
+    });
+    var that = this;
+    req.post('/api/user/buyOrder/list', {pageSize: 100}, function(data) {
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
+      that.setData({
+        orderList: data
+      });
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  goPay(e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('gopay: ', id, e);
+    app.payByOrderId(id);
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  cancelOrder(e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('cancel', id)
+    app.cancelOrder(id);
   }
 })
