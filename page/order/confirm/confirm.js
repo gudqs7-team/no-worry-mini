@@ -23,7 +23,7 @@ Page({
   },
   onShow(e) {
     console.log('show: ', e);
-    this.initAddressInfo(0);
+    this.initAddressInfo();
     this.initCarGoods(function(data){
       console.log('callback: ', data);
       if (data.length <= 0 && !doPay){
@@ -31,7 +31,8 @@ Page({
       }
     });
   },
-  initAddressInfo(addressId) {
+  initAddressInfo() {
+    var addressId = this.data.choseAddressId;
     var that = this;
     var url = '/api/user/userAddress/getDefault';
     var data = {};
@@ -92,7 +93,10 @@ Page({
       events: {
         choseId: function (data) {
           var id = data.id;
-          that.initAddressInfo(id);
+          that.setData({
+            choseAddressId: id
+          });
+          that.initAddressInfo();
         }
       }
     })
