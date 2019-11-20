@@ -250,8 +250,8 @@ Page({
             });
             that.heightArr = heightArr;
           }).exec();
+          that.calcCartCount();
         }, 500);
-        that.calcCartCount();
       }
     });
 
