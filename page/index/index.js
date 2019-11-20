@@ -25,6 +25,7 @@ Page({
     showCart: false,
     cartTotalCount: 0,
     cartTotalPrice: 0,
+    //type count
     cartTypeMap: {
     },
     cartSnackMap: {
@@ -148,6 +149,23 @@ Page({
       cartSnackMap: cartSnackMap
     })
   },
+  calcCartCount() {
+    var data = this.data.cartList;
+    var cartSnackMap = {};
+    var cartTypeMap = {};
+    for (var i = 0; i < data.length; i++) {
+      var car = data[i];
+      var count = car.count;
+      cartSnackMap[car.snackId] = count;
+      var good = this.data.goodsMap[car.snackId];
+      var typeSc = cartTypeMap[good.snackTypeId] || 0;
+      cartTypeMap[good.snackTypeId] = typeSc + count;
+    }
+    this.setData({
+      cartSnackMap: cartSnackMap,
+      cartTypeMap: cartTypeMap
+    });
+  },
   initTypeMap(data) {
     var typeMap = {}
     var cartTypeMap = {}
@@ -233,6 +251,7 @@ Page({
             that.heightArr = heightArr;
           }).exec();
         }, 500);
+        that.calcCartCount();
       }
     });
 
@@ -336,6 +355,7 @@ Page({
     }
     var id = e.target.dataset.id;
     var cartSnackMap = this.data.cartSnackMap;
+    var cartTypeMap = this.data.cartTypeMap;
     var count = cartSnackMap[id] || 0;
     var goods = this.data.goodsMap[id];
     var biggerThenCount = goods.snackStock > 10 ? global.maxCartCount : goods.snackStock;
@@ -353,15 +373,20 @@ Page({
     
     count += 1;
     cartSnackMap[id] = count;
+    var typeSc = cartTypeMap[goods.snackTypeId] || 0;
+    cartTypeMap[goods.snackTypeId] = typeSc + 1;
     this.setData({
-      cartSnackMap: cartSnackMap
+      cartSnackMap: cartSnackMap,
+      cartTypeMap: cartTypeMap
     });
     this.updateCarTotal();
   },
   substractSnack(e) {
     var id = e.target.dataset.id;
     var cartSnackMap = this.data.cartSnackMap;
+    var cartTypeMap = this.data.cartTypeMap;
     var count = cartSnackMap[id] || 0;
+    var good = this.data.goodsMap[id];
     count -= 1;
     if (count === 0) {
       this.deleteFromCartList(id);
@@ -369,8 +394,11 @@ Page({
       this.updateCartCount(id, count);
     }
     cartSnackMap[id] = count;
+    var typeSc = cartTypeMap[good.snackTypeId] || 1;
+    cartTypeMap[good.snackTypeId] = typeSc - 1;
     this.setData({
-      cartSnackMap: cartSnackMap
+      cartSnackMap: cartSnackMap,
+      cartTypeMap: cartTypeMap
     });
     this.updateCarTotal();
   },
@@ -460,6 +488,7 @@ Page({
       that.setData({
         cartList: [],
         cartSnackMap: {},
+        cartTypeMap: {},
         cartTotalCount: 0,
         cartTotalPrice: 0,
         showCart: false
