@@ -4,9 +4,9 @@
     </view>
     <view class="page-height-view"></view>
     <view class="page-body">
-        <scroll-view scroll-y="true" class="left-type" style="height: {{height}}rpx">
+        <scroll-view scroll-y="true" class="left-type" style="height: {{height}}rpx" scroll-into-view="{{typeToView}}" >
           <block wx:for="{{typeList}}" wx:for-item="type" wx:key="1">
-            <view data-id="{{type.snackTypeId}}" class="type-item {{activeTypeId==type.snackTypeId ? 'active':''}}" bindtap="changeType">
+            <view id="type-{{type.snackTypeId}}" data-id="{{type.snackTypeId}}" class="type-item {{activeTypeId==type.snackTypeId ? 'active':''}}" bindtap="changeType">
               {{type.snackTypeName}}
               <mp-badge wx:if="{{ cartTypeMap[type.snackTypeId] > 0 }}" extClass="type-item-count" content="{{cartTypeMap[type.snackTypeId]}}"/>
             </view>
@@ -14,39 +14,41 @@
           <view class="empty-height-view"></view>
         </scroll-view>
 
-        <scroll-view scroll-with-animation='true' scroll-y="true" class="right-goods" style="height: {{height}}rpx" scroll-into-view="{{goodsToView}}" >
+        <scroll-view scroll-with-animation='true' bindscroll="onScroll" scroll-y="true" class="right-goods" style="height: {{height}}rpx" scroll-into-view="{{goodsToView}}" >
           <block wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
-            <view id="type-{{typeId}}" class="goods-type-head">
-              <view class="type-head-name">{{typeMap[typeId]}}</view>
-              <view class="type-head-filter">
-                <view class="weui-flex">
-                  <view bindtap="sortBySales" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackSale' ? 'active' : '' }}">销量</view></view>
-                  <view bindtap="sortByPrice" data-id="{{typeId}}" class="weui-flex__item">
-                    <view class="filter-item {{ sortBy[typeId] == 'snackPrice' ? 'active' : '' }}">价格<text class="iconfont icon-sort"></text></view>
+            <view class="type-div">
+              <view id="type-{{typeId}}" class="goods-type-head">
+                <view class="type-head-name">{{typeMap[typeId]}}</view>
+                <view class="type-head-filter">
+                  <view class="weui-flex">
+                    <view bindtap="sortBySales" data-id="{{typeId}}" class="weui-flex__item"><view class="filter-item {{ sortBy[typeId] == 'snackSale' ? 'active' : '' }}">销量</view></view>
+                    <view bindtap="sortByPrice" data-id="{{typeId}}" class="weui-flex__item">
+                      <view class="filter-item {{ sortBy[typeId] == 'snackPrice' ? 'active' : '' }}">价格<text class="iconfont icon-sort"></text></view>
+                    </view>
                   </view>
                 </view>
               </view>
-            </view>
-            <view class="goods-item" wx:for="{{snackList}}" wx:for-item="snack" wx:key="" data-id="{{snack.snackId}}">
-              <view class="goods-item-pic">
-                <image mode="aspectFill" src="{{snack.snackPic}}"></image>
-              </view>
-              <view class="goods-detail">
-                <view class="goods-name">{{snack.snackName}}</view>
-                <view class="goods-sale">月销{{snack.snackSale}}份</view>
-                <text wx:if="{{snack.snackStock < 10}}" class="goods-stock">剩{{snack.snackStock}}份</text>
-                <view class="goods-price">
-                  <text class="money-text">¥ </text>
-                  <text class="price-text">{{snack.snackPriceText}}</text>
+              <view class="goods-item" wx:for="{{snackList}}" wx:for-item="snack" wx:key="" data-id="{{snack.snackId}}">
+                <view class="goods-item-pic">
+                  <image mode="aspectFill" src="{{snack.snackPic}}"></image>
                 </view>
-                <view class="goods-buy">
-                  <text bindtap="substractSnack" data-id="{{snack.snackId}}" wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="icon iconfont icon-substract">  </text>
-                  <text wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="buy-count"> {{ cartSnackMap[snack.snackId] }} </text>
-                  <text bindtap="addSnack" data-id="{{snack.snackId}}" 
-                  class="icon iconfont icon-add {{ cartSnackMap[snack.snackId] >= (goodsMap[snack.snackId].snackStock > 10 ? maxCartCount : goodsMap[snack.snackId].snackStock) ? 'disable' : '' }}">  </text>
+                <view class="goods-detail">
+                  <view class="goods-name">{{snack.snackName}}</view>
+                  <view class="goods-sale">月销{{snack.snackSale}}份</view>
+                  <text wx:if="{{snack.snackStock < 10}}" class="goods-stock">剩{{snack.snackStock}}份</text>
+                  <view class="goods-price">
+                    <text class="money-text">¥ </text>
+                    <text class="price-text">{{snack.snackPriceText}}</text>
+                  </view>
+                  <view class="goods-buy">
+                    <text bindtap="substractSnack" data-id="{{snack.snackId}}" wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="icon iconfont icon-substract">  </text>
+                    <text wx:if="{{ cartSnackMap[snack.snackId] > 0 }}" class="buy-count"> {{ cartSnackMap[snack.snackId] }} </text>
+                    <text bindtap="addSnack" data-id="{{snack.snackId}}" 
+                    class="icon iconfont icon-add {{ cartSnackMap[snack.snackId] >= (goodsMap[snack.snackId].snackStock > 10 ? maxCartCount : goodsMap[snack.snackId].snackStock) ? 'disable' : '' }}">  </text>
+                  </view>
                 </view>
+                
               </view>
-              
             </view>
           </block>
           <view class="empty-height-view"></view>

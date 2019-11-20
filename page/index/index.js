@@ -30,6 +30,7 @@ Page({
     cartSnackMap: {
     },
     goodsToView: 'toview',
+    typeToView: 'toview',
     desc: {
 
     },
@@ -61,7 +62,6 @@ Page({
         typeList: data
       })
       var typeId = that.data.activeTypeId;
-      that.initTypeGoods(typeId, null);
     })
     console.log('load: ', global)
     if (global.user == null) {
@@ -160,6 +160,11 @@ Page({
       }
       typeMap[typeId] = type.snackTypeName;
       cartTypeMap[typeId] = 0;
+      var last = false;
+      if (i === data.length - 1) {
+        last = true;
+      }
+      this.initTypeGoods(typeId, last);
     }
     this.setData({
       activeTypeId: activeTypeId,
@@ -167,7 +172,7 @@ Page({
       cartTypeMap: cartTypeMap
     })
   },
-  initTypeGoods(typeId) {
+  initTypeGoods(typeId, last) {
     var goods = this.data.goods || {};
     var goodsData = goods[typeId];
     if (goodsData && goodsData.length > 0 && typeId !== -1) {
@@ -176,9 +181,9 @@ Page({
       });
       return true;
     }
-    this.initGoods(typeId);
+    this.initGoods(typeId, last);
   },
-  initGoods(typeId) {
+  initGoods(typeId, last) {
     var that = this;
     wx.showLoading({
       title: 'Loading',
@@ -212,13 +217,50 @@ Page({
       that.setData({
         goods: goods,
         goodsMap: goodsMap,
-        cartSnackMap: cartSnackMap,
-        goodsToView: 'type-' + typeId
+        cartSnackMap: cartSnackMap
       });
       wx.hideLoading();
-    })
+      if (last) {
+        setTimeout(function(){
+          var query = wx.createSelectorQuery();
+          var heightArr = [];
+          var sumHeight = 0;
+          query.selectAll('.type-div').boundingClientRect(function (n) {
+            n.forEach((res) => {
+              sumHeight += res.height;
+              heightArr.push(sumHeight)
+            });
+            that.heightArr = heightArr;
+          }).exec();
+        }, 500);
+      }
+    });
 
-    
+  },
+  onScroll(e) {
+    let scrollTop = e.detail.scrollTop;
+    let scrollArr = this.heightArr;
+
+    var typeIndex = -1;
+    for (var i = 0; i < scrollArr.length; i++) {
+      var leftX = 0;
+      if (i !== 0){
+        leftX = scrollArr[i - 1];
+      }
+      var flag = scrollTop >= leftX && scrollTop < scrollArr[i];
+      if (flag) {
+        typeIndex = i;
+        break;
+      }
+    }
+    if (typeIndex != -1) {
+      var activeId = this.data.typeList[typeIndex].snackTypeId;
+      this.setData({
+        activeTypeId: activeId,
+        typeToView: 'type-'+activeId
+      });
+    }
+
   },
   sortBySales(e) {
     var that = this;
