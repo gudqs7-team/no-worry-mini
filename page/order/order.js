@@ -48,5 +48,18 @@ Page({
     wx.navigateTo({
       url: '/page/order/detail/detail?id=' + id,
     })
+  },
+  buyAgain(e) {
+    var id = e.currentTarget.dataset.id;
+    console.log('buyAgain: ', id, e); 
+    wx.showLoading({
+      title: 'Loading...',
+    })
+    req.post('/api/user/buyOrder/buyAgain', {orderId: id}, function(data){
+      wx.hideLoading();
+      wx.navigateTo({
+        url: '/page/order/confirm/confirm',
+      })
+    })
   }
 })
