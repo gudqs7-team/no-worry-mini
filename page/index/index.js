@@ -557,7 +557,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '解忧零食铺',
+      title: '口袋零食铺',
       desc: '快来看看吧',
       path: '/page/index/index'
     }

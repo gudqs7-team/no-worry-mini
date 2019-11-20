@@ -155,7 +155,7 @@ Page({
         orderType: 1,
         otherOrderId: orderId,
         openId: openId,
-        memo: '解忧零食铺外卖'
+        memo: '口袋零食铺外卖'
       }, function(pay) {
         wx.requestPayment({
           timeStamp: pay.timeStamp || '',
