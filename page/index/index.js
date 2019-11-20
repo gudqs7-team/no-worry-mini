@@ -48,6 +48,7 @@ Page({
     req.post('/api/snack/car/list', {}, function (data) {
       wx.hideLoading();
       that.initCart(data);
+      that.calcCartCount();
     });
   },
   onLoad(e) {

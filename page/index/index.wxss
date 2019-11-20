@@ -18,7 +18,7 @@ page{
 }
 .page-height-view {
   width: 100%;
-  height: 100rpx;
+  height: 95rpx;
 }
 .right-goods {
   float: right;
