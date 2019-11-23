@@ -9,7 +9,16 @@ Page({
     detailDoor: '',
     defaultAddress: 0,
     addressId: 0,
-    needJump: false
+    needJump: false,
+    detailCountList: [
+      '6栋',
+      '7栋',
+      '8栋',
+      '9栋',
+      '10栋',
+      '其他(备注说明)'
+    ],
+    detailCountIndex: 0
   },
   onLoad: function (options) {
     var that = this;
@@ -101,5 +110,14 @@ Page({
     var data = {};
     data[name] = val;
     this.setData(data);
+  },
+  bindDC(e) {
+    console.log('dc', e);
+    var countIndex = parseInt(e.detail.value);
+    var count = this.data.detailCountList[countIndex];
+    this.setData({
+      detailCountIndex: countIndex,
+      detailCount: count
+    });
   }
 })

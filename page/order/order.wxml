@@ -16,7 +16,7 @@
       <view class="order-btn">
         <button data-id="{{order.orderId}}" wx:if="{{ order.status == 0 }}" class="weui-btn" type="default" catchtap="cancelOrder">取消订单</button>
         <button data-id="{{order.orderId}}" wx:if="{{ order.status == 0 }}" class="weui-btn" type="primary" catchtap="goPay">立即支付</button>
-        <button data-id="{{order.orderId}}" wx:if="{{ order.status == 1 }}" class="weui-btn" type="primary" catchtap="buyAgain">再来一单</button>
+        <button data-id="{{order.orderId}}" wx:if="{{ order.status != 0 }}" class="weui-btn" type="primary" catchtap="buyAgain">再来一单</button>
       </view>
     </view>
   </block>

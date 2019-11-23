@@ -9,11 +9,14 @@
           <input value="{{contactPhone}}" bindinput="inputChange" data-name="contactPhone" class="weui-input" placeholder="请输入联系人手机号"/>
       </mp-cell>
       
-      <mp-cell title="宿舍栋数" ext-class="">
-          <input value="{{detailCount}}" bindinput="inputChange" data-name="detailCount" class="weui-input" placeholder="请输入宿舍栋数"/>
+      <mp-cell ext-class="weui-cell_select weui-cell_select-after weui-cell-no-padding">
+          <view slot="title" class="weui-label">宿舍栋数</view>
+          <picker bindchange="bindDC" value="{{detailCountIndex}}" range="{{detailCountList}}">
+              <view class="weui-select">{{detailCountList[detailCountIndex]}}</view>
+          </picker>
       </mp-cell>
       <mp-cell title="宿舍门号" ext-class="">
-          <input value="{{detailDoor}}" bindinput="inputChange" data-name="detailDoor" class="weui-input" placeholder="请输入宿舍门号"/>
+          <input value="{{detailDoor}}" bindinput="inputChange" data-name="detailDoor" class="weui-input" placeholder="请输入宿舍门号, 如 502"/>
       </mp-cell>
       
     </mp-cells>
@@ -24,7 +27,6 @@
     </mp-cells>
   </mp-form>
   <view class="tips">
-    TIPS: 栋数直接填数字或填 xx 栋都可以
   </view>
   <view class="empty-height-view"></view>
   <view class="save-btn">

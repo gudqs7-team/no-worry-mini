@@ -5,3 +5,8 @@
   font-size: 30rpx;
   color: #A8A8A8;
 }
+
+.weui-cell-no-padding {
+  padding: 0 !important;
+  padding-left: 16px!important;
+}
