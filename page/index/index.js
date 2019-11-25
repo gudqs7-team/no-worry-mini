@@ -126,7 +126,7 @@ Page({
       typeMap: typeMap,
       activeTypeId: -1
     });
-    this.initTypeGoods(-1);
+    this.initGoods(-1, true);
     e.detail.obj.hideInput();
   },
   initCart(data) {
@@ -179,12 +179,8 @@ Page({
       }
       typeMap[typeId] = type.snackTypeName;
       cartTypeMap[typeId] = 0;
-      var last = false;
-      if (i === data.length - 1) {
-        last = true;
-      }
-      this.initTypeGoods(typeId, last);
     }
+    this.initAllGoods();
     this.setData({
       activeTypeId: activeTypeId,
       typeMap: typeMap,
@@ -200,7 +196,17 @@ Page({
       });
       return true;
     }
-    this.initGoods(typeId, last);
+  },
+  initAllGoods(){
+    var that = this;
+    req.post('/api/snack/snack/listAll', {}, function (data) {
+      var keys = Object.keys(data);
+      for(var i = 0; i < keys.length; i++) {
+        var typeId = keys[i];
+        that.renderGoods(typeId, data[typeId]);
+      }
+      that.initScroll();
+    });
   },
   initGoods(typeId, last) {
     var that = this;
@@ -208,7 +214,7 @@ Page({
       title: 'Loading',
     });
 
-    var reqData = {};
+    var reqData = {pageSize: 0};
     if (typeId && typeId != -1) {
       reqData.snackTypeId = typeId;
     }
@@ -222,40 +228,49 @@ Page({
       reqData.snackName = search.trim();
     }
     req.post('/api/snack/snack/list', reqData, function (data) {
-      var goods = that.data.goods || {};
-      var goodsMap = that.data.goodsMap || {};
-      goods[typeId] = data;
-      var cartSnackMap = that.data.cartSnackMap || {};
-      for (var i = 0; i < data.length; i++) {
-        var snack = data[i];
-        var id = snack.snackId;
-        snack.snackPriceText = (snack.snackPrice / 100).toFixed(1);
-        cartSnackMap[id] = cartSnackMap[id] || 0;
-        goodsMap[id] = snack;
-      }
-      that.setData({
-        goods: goods,
-        goodsMap: goodsMap,
-        cartSnackMap: cartSnackMap
-      });
+      that.renderGoods(typeId, data);
       wx.hideLoading();
       if (last) {
-        setTimeout(function(){
-          var query = wx.createSelectorQuery();
-          var heightArr = [];
-          var sumHeight = 0;
-          query.selectAll('.type-div').boundingClientRect(function (n) {
-            n.forEach((res) => {
-              sumHeight += res.height;
-              heightArr.push(sumHeight)
-            });
-            that.heightArr = heightArr;
-          }).exec();
-          that.calcCartCount();
-        }, 500);
+        that.initScroll();
       }
     });
 
+  },
+
+  renderGoods(typeId, data) {
+    var that = this;
+    var goods = that.data.goods || {};
+    var goodsMap = that.data.goodsMap || {};
+    goods[typeId] = data;
+    var cartSnackMap = that.data.cartSnackMap || {};
+    for (var i = 0; i < data.length; i++) {
+      var snack = data[i];
+      var id = snack.snackId;
+      snack.snackPriceText = (snack.snackPrice / 100).toFixed(1);
+      cartSnackMap[id] = cartSnackMap[id] || 0;
+      goodsMap[id] = snack;
+    }
+    that.setData({
+      goods: goods,
+      goodsMap: goodsMap,
+      cartSnackMap: cartSnackMap
+    });
+  },
+  initScroll(){
+    var that = this;
+    setTimeout(function () {
+      var query = wx.createSelectorQuery();
+      var heightArr = [];
+      var sumHeight = 0;
+      query.selectAll('.type-div').boundingClientRect(function (n) {
+        n.forEach((res) => {
+          sumHeight += res.height;
+          heightArr.push(sumHeight)
+        });
+        that.heightArr = heightArr;
+      }).exec();
+      that.calcCartCount();
+    }, 500);
   },
   onScroll(e) {
     let scrollTop = e.detail.scrollTop;
@@ -336,9 +351,9 @@ Page({
   changeType(e){
     var typeId = e.target.dataset.id;
     this.setData({
-      activeTypeId: typeId
+      activeTypeId: typeId,
+      goodsToView: 'type-' + typeId
     })
-    this.initTypeGoods(typeId, null);
   },
   checkLogin() {
     var needLogin = this.data.needLogin;
