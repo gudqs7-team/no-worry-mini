@@ -227,10 +227,10 @@ Page({
       reqData.snackName = search.trim();
     }
     req.post('/api/snack/snack/list', reqData, function (data) {
+      that.renderGoods(typeId, data);
       that.setData({
         goodsToView: 'type-' + typeId
       });
-      that.renderGoods(typeId, data);
       wx.hideLoading();
       if (last) {
         that.initScroll();
