@@ -28,8 +28,7 @@ Page({
     //type count
     cartTypeMap: {
     },
-    cartSnackMap: {
-    },
+      cartSnackMap: {},
     goodsToView: 'toview',
     typeToView: 'toview',
     desc: {
@@ -119,7 +118,7 @@ Page({
     if (!typeMap['-1']) {
       typeList.push(type);
     }
-    
+
     typeMap['-1'] = type.snackTypeName;
     this.setData({
       typeList: typeList,
@@ -228,6 +227,9 @@ Page({
       reqData.snackName = search.trim();
     }
     req.post('/api/snack/snack/list', reqData, function (data) {
+      that.setData({
+        goodsToView: 'type-' + typeId
+      });
       that.renderGoods(typeId, data);
       wx.hideLoading();
       if (last) {
@@ -337,10 +339,10 @@ Page({
         nextSort = 'displayOrder';
       }
     }
-    
+
     console.log('sort price: ', sortBy, desc, nextSort, nextDesc);
-    
-    sortByMap[typeId] = nextSort;
+
+      sortByMap[typeId] = nextSort;
     descMap[typeId] = nextDesc;
     this.setData({
       sortBy: sortByMap,
@@ -386,8 +388,8 @@ Page({
     } else {
       this.updateCartCount(id, count+1);
     }
-    
-    count += 1;
+
+      count += 1;
     cartSnackMap[id] = count;
     var typeSc = cartTypeMap[goods.snackTypeId] || 0;
     cartTypeMap[goods.snackTypeId] = typeSc + 1;
@@ -438,7 +440,7 @@ Page({
   },
   updateCartCount(id, count) {
     req.post('/api/snack/car/update', {
-      snackId: id, 
+        snackId: id,
       count: count
     }, function(data) {
       console.log('update count : ', data)
@@ -545,8 +547,8 @@ Page({
         var user = res.data;
         var openId = user.openId;
         app.saveToLocal(openId, user, token);
-        
-        that.setData({
+
+          that.setData({
           loginNow: false,
           needLogin: false
         });
@@ -577,7 +579,7 @@ Page({
       desc: '快来看看吧',
       path: '/page/index/index'
     }
-  }, 
+  },
   closeDialog(){
     this.setData({
       loginNow: false
