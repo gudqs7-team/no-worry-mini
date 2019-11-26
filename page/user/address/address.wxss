@@ -17,14 +17,21 @@
 .addr-item .left-info {
   float: left;
   height: 180rpx;
+  width: 500rpx;
+}
+.default-addr-badge {
+  display: inline-block;
+  margin-top: -7rpx;
+  margin-left: 15rpx;
 }
 
 .addr-item .right-btn {
   float: right;
+  width: 100rpx;
   height: 180rpx;
   position: absolute;
   top: 50rpx;
-  right: 30rpx;
+  right: 10rpx;
 }
 
 .right-btn text {

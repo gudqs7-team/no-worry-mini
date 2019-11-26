@@ -12,7 +12,7 @@ Page({
     ],
     totalPrice: 0,
     totalPriceText: '0',
-    orderMemo: '',
+    orderMemo: '请快快送过来啦',
     choseAddressId: 0,
     noAddress: true,
     doPay: false

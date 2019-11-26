@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-badge": "../../../weui/badge/badge"
+  },
   "navigationBarTitleText": "我的地址"
 }

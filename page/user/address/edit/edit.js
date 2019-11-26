@@ -5,7 +5,7 @@ Page({
   data: {
     contactName: '',
     contactPhone: '',
-    detailCount: '',
+    detailCount: '6',
     detailDoor: '',
     defaultAddress: 0,
     addressId: 0,
@@ -15,8 +15,7 @@ Page({
       '7栋',
       '8栋',
       '9栋',
-      '10栋',
-      '其他(备注说明)'
+      '10栋'
     ],
     detailCountIndex: 0
   },
@@ -38,13 +37,22 @@ Page({
           detailCount = (detailArr[0] || '').trim();
           detailDoor = (detailArr[1] || '').trim();
         }
+        var countIndex = 0;
+        for (var i = 0; i < that.data.detailCountList.length; i++) {
+          var item = that.data.detailCountList[i];
+          if (item == (detailCount + '栋')) {
+            countIndex = i;
+            break;
+          }
+        }
         that.setData({
           addressId: id,
           contactName: data.contactName,
           contactPhone: data.contactPhone,
-          detailCount: detailCount,
+          detailCount: that.data.detailCountList[countIndex],
           detailDoor: detailDoor,
-          defaultAddress: data.defaultAddress
+          defaultAddress: data.defaultAddress,
+          detailCountIndex: countIndex
         })
       })
     }
@@ -58,6 +66,26 @@ Page({
       detailAddress: detailAddress,
       defaultAddress: defaultAddress
     };
+    if (!data.contactName || data.contactName == '') {
+      wx.showToast({
+        title: '请输入联系人',
+      });
+      return false;
+    }
+    if (!data.contactPhone || data.contactPhone == '') {
+      wx.showToast({
+        title: '请输入手机号',
+      });
+      return false;
+    }
+    var door = this.data.detailDoor;
+    if (!door || door == '') {
+      wx.showToast({
+        title: '请输入宿舍门号',
+      });
+      return false;
+    }
+
     if (this.data.addressId !==0){
       data.addressId = this.data.addressId;
     }
@@ -82,20 +110,26 @@ Page({
   },
   deleteAddr(e) {
     var that = this;
-    if (this.data.addressId !== 0) {
-      var addressId = this.data.addressId;
-      wx.showLoading({
-        title: '删除中...',
-      })
-      req.post('/api/user/userAddress/delete', {addressId: addressId}, function() {
-        wx.hideLoading();
-        const eventChannel = that.getOpenerEventChannel();
-        if (eventChannel && eventChannel.emit) {
-          eventChannel.emit('saveSuccess', { data: 'test' });
+    wx.showModal({
+      title: '',
+      content: '确认删除地址吗?',
+      success(res) {
+        if (that.data.addressId !== 0) {
+          var addressId = that.data.addressId;
+          wx.showLoading({
+            title: '删除中...',
+          })
+          req.post('/api/user/userAddress/delete', { addressId: addressId }, function () {
+            wx.hideLoading();
+            const eventChannel = that.getOpenerEventChannel();
+            if (eventChannel && eventChannel.emit) {
+              eventChannel.emit('saveSuccess', { data: 'test' });
+            }
+            wx.navigateBack();
+          });
         }
-        wx.navigateBack();
-      });
-    }
+      }
+    });
   },
   changeDefaultAddress(e) {
     var val = e.detail.value[0] || '0';

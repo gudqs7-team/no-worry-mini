@@ -6,6 +6,7 @@
         <view class="left-info">
           <view class="item-head">
             {{addr.detailAddress}}
+            <mp-badge wx:if="{{ addr.defaultAddress == 1 }}" extClass="default-addr-badge" content="默认地址"/>
           </view>
           <view class="item-body">
             {{addr.area}}
