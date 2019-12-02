@@ -40,6 +40,48 @@ Page({
     searchName: ''
   },
   onShow() {
+    this.initCart0();
+  },
+  onPullDownRefresh() {
+    var that = this;
+    that.init(function() {
+      that.initCart0();
+    });
+  },
+  onLoad(e) {
+    console.log('on load: ', global, e)
+    if (global.user == null) {
+      app.getOpenId(function (openId, user) {
+        if (user == null) {
+          that.setData({
+            needLogin: true
+          })
+        }
+      });
+    }
+    this.setData({
+      search: this.search.bind(this)
+    });
+    this.init();
+  },
+  init(callback) {
+    var that = this;
+    wx.showLoading({
+      title: 'Loading...',
+    });
+    req.post('/api/snack/snackType/list', {}, function (data) {
+      wx.hideLoading();
+      that.initTypeMap(data);
+      that.setData({
+        typeList: data
+      });
+      that.initAllGoods(callback);
+      setTimeout(function(){
+        wx.stopPullDownRefresh();
+      }, 3000);
+    })
+  },
+  initCart0() {
     var that = this;
     wx.showLoading({
       title: 'Loading...',
@@ -49,35 +91,6 @@ Page({
       that.initCart(data);
       that.calcCartCount();
     });
-  },
-  onLoad(e) {
-    wx.showLoading({
-      title: 'Loading...',
-    });
-    var that = this;
-    console.log('on load..', e);
-    req.post('/api/snack/snackType/list', {}, function(data){
-      wx.hideLoading();
-      that.initTypeMap(data);
-      that.setData({
-        typeList: data
-      })
-      var typeId = that.data.activeTypeId;
-    })
-    console.log('load: ', global)
-    if (global.user == null) {
-      app.getOpenId(function(openId, user){
-        if (user == null) {
-          that.setData({
-            needLogin: true
-          })
-        }
-      });
-    }
-
-    this.setData({
-      search: this.search.bind(this)
-    })
   },
   search(value) {
     console.log('search: ', value);
@@ -158,8 +171,10 @@ Page({
       var count = car.count;
       cartSnackMap[car.snackId] = count;
       var good = this.data.goodsMap[car.snackId];
-      var typeSc = cartTypeMap[good.snackTypeId] || 0;
-      cartTypeMap[good.snackTypeId] = typeSc + count;
+      if (good && good.snackTypeId) {
+        var typeSc = cartTypeMap[good.snackTypeId] || 0;
+        cartTypeMap[good.snackTypeId] = typeSc + count;
+      }
     }
     this.setData({
       cartSnackMap: cartSnackMap,
@@ -167,8 +182,9 @@ Page({
     });
   },
   initTypeMap(data) {
-    var typeMap = {}
-    var cartTypeMap = {}
+    var goods = this.data.goods || {};
+    var typeMap = {};
+    var cartTypeMap = {};
     var activeTypeId = 0;
     for (var i = 0; i < data.length; i++) {
       var type = data[i];
@@ -178,33 +194,32 @@ Page({
       }
       typeMap[typeId] = type.snackTypeName;
       cartTypeMap[typeId] = 0;
+      goods[typeId] = [];
     }
-    this.initAllGoods();
     this.setData({
+      goods: goods,
       activeTypeId: activeTypeId,
       typeMap: typeMap,
       cartTypeMap: cartTypeMap
     })
   },
-  initTypeGoods(typeId, last) {
-    var goods = this.data.goods || {};
-    var goodsData = goods[typeId];
-    if (goodsData && goodsData.length > 0 && typeId !== -1) {
-      this.setData({
-        goodsToView: 'type-' + typeId
-      });
-      return true;
-    }
-  },
-  initAllGoods(){
+  initAllGoods(callback){
     var that = this;
+    wx.showLoading({
+      title: 'Loading...',
+    });
     req.post('/api/snack/snack/listAll', {}, function (data) {
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
       var keys = Object.keys(data);
       for(var i = 0; i < keys.length; i++) {
         var typeId = keys[i];
         that.renderGoods(typeId, data[typeId]);
       }
       that.initScroll();
+      if (callback) {
+        callback();
+      }
     });
   },
   initGoods(typeId, last) {

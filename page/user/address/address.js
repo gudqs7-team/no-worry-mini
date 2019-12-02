@@ -25,6 +25,7 @@ Page({
     });
     req.post('/api/user/userAddress/list', {}, function(data) {
       wx.hideLoading();
+      wx.stopPullDownRefresh();
       that.setData({
         addressList: data,
         init: true
@@ -69,5 +70,8 @@ Page({
       eventChannel.emit('choseId', { id: id});
       wx.navigateBack({});
     }
+  },
+  onPullDownRefresh() {
+    this.initAddrList();
   }
 })

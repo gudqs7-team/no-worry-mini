@@ -33,5 +33,13 @@ Page({
     wx.navigateTo({
       url: '/page/order/order'
     });
+  },
+  clearAll () {
+    wx.clearStorageSync();
+    
+    wx.redirectTo({
+      url: '/page/index/index',
+    })
   }
+
 })

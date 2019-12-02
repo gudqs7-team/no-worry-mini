@@ -15,7 +15,7 @@
         </scroll-view>
 
         <scroll-view scroll-with-animation='true' bindscroll="onScroll" scroll-y="true" class="right-goods" style="height: {{height}}rpx" scroll-into-view="{{goodsToView}}" >
-          <block wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
+          <block wx:if="{{ snackList.length > 0 }}" wx:for="{{goods}}" wx:for-item="snackList" wx:for-index="typeId" wx:key="typeId">
             <view class="type-div">
               <view id="type-{{typeId}}" class="goods-type-head">
                 <view class="type-head-name">{{typeMap[typeId]}}</view>

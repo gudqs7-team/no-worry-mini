@@ -14,4 +14,8 @@
     <text class="iconfont icon-order"></text>
     全部订单
   </view>
+  <view class='menu-item' bindtap="clearAll">
+    <text class="iconfont icon-custom-user"></text>
+    清空缓存
+  </view>
 </view>
