@@ -1,6 +1,7 @@
 
 var reqHost = 'https://wap.jzxcxin.xyz/noworry';
 // var reqHost = 'http://localhost:9797';
+// var reqHost = 'http://e.jzxcxin.xyz/noworry';
 
 var app = getApp();
 
@@ -43,8 +44,17 @@ var ajax = function(options, retry) {
           if (options.callback) {
             options.callback(data.data);
           }
+        } else {
+          wx.hideLoading();
+          wx.showToast({
+            title: '系统异常!',
+          });
         }
-      }else {
+      } else {
+        wx.hideLoading();
+        wx.showToast({
+          title: '系统错误!',
+        });
         if (options.fail) {
           options.fail(res);
         }
