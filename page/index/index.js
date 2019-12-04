@@ -49,6 +49,7 @@ Page({
     });
   },
   onLoad(e) {
+    var that = this;
     console.log('on load: ', global, e)
     if (global.user == null) {
       app.getOpenId(function (openId, user) {
@@ -548,6 +549,12 @@ Page({
     });
     console.log('login: ', e);
     var detail = e.detail;
+    if (!detail.iv || !detail.encryptedData) {
+      wx.showToast({
+        title: '您没有登录哦!',
+      })
+      return false;
+    }
     req.post('/api/user/update', {
       encryptedData: detail.encryptedData,
       iv: detail.iv,

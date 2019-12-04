@@ -3,6 +3,18 @@ const req = require('./util/req.js');
 
 App({
   onLaunch(opts) {
+
+    // on lanch
+    var sys = wx.getSystemInfoSync();
+    global.height = sys.windowHeight;
+    global.width = sys.windowWidth;
+    global.isIpx = sys.model.indexOf('iPhone X') !== -1;
+    global.maxCartCount = 99;
+    
+    this.initLogin();
+  },
+  onShow(opts) {
+    console.log('App Show', opts)
     const updateManager = wx.getUpdateManager()
 
     updateManager.onCheckForUpdate(function (res) {
@@ -26,18 +38,6 @@ App({
     updateManager.onUpdateFailed(function () {
       // 新版本下载失败
     })
-
-    // on lanch
-    var sys = wx.getSystemInfoSync();
-    global.height = sys.windowHeight;
-    global.width = sys.windowWidth;
-    global.isIpx = sys.model.indexOf('iPhone X') !== -1;
-    global.maxCartCount = 99;
-    
-    this.initLogin();
-  },
-  onShow(opts) {
-    console.log('App Show', opts)
   },
   onHide() {
     console.log('App Hide')
@@ -87,6 +87,7 @@ App({
             }
             that.saveToLocal(openId, user, token);
             if (callback) {
+              console.log('get open id:', openId, user, token);
               callback(openId, user, token);
             }
           }
@@ -103,6 +104,12 @@ App({
       return JSON.parse(userStr)
     }
     return null;
+  },
+  clearAll() {
+    wx.clearStorageSync();
+    delete global.openId;
+    delete global.user;
+    delete global.token;
   },
   saveToLocal(openId, user, token){
     if (openId && openId != '') {

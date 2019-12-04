@@ -35,9 +35,8 @@ Page({
     });
   },
   clearAll () {
-    wx.clearStorageSync();
-    
-    wx.redirectTo({
+    getApp().clearAll();
+    wx.reLaunch({
       url: '/page/index/index',
     })
   }

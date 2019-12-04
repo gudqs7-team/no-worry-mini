@@ -45,9 +45,15 @@ var ajax = function(options, retry) {
             options.callback(data.data);
           }
         } else {
+          if (data.code === 1001 || data.code === 1002) {
+            console.error('token 过期或错误!');
+            getApp().getOpenId();
+          }
           wx.hideLoading();
           wx.showToast({
-            title: '系统异常!',
+            title: '系统异常, 请重试!',
+            icon: 'none',
+            duration: 2000
           });
         }
       } else {
