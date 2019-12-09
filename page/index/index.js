@@ -595,6 +595,12 @@ Page({
       url: '/page/user/user'
     });
   },
+  goKefuPage(e) {
+    console.log('go kefu ', e)
+    wx.navigateTo({
+      url: '/page/kefu/kefu'
+    });
+  },
   onShareAppMessage() {
     return {
       title: '口袋零食铺',

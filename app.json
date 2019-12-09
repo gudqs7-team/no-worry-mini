@@ -6,7 +6,8 @@
     "page/user/address/address",
     "page/order/confirm/confirm",
     "page/user/address/edit/edit",
-    "page/order/detail/detail"
+    "page/order/detail/detail",
+    "page/kefu/kefu"
   ],
   "window": {
     "navigationBarTextStyle": "black",

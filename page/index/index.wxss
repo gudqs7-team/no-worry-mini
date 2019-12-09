@@ -164,12 +164,15 @@ page{
 }
 
 .goods-buy .icon {
+  display: inline-block;
   color: white;
   background: #128FFA;
   border-radius: 50%;
-  padding: 3rpx 5rpx;
-  height: 15rpx;
-  width: 15rpx;
+  /* padding: 3rpx 5rpx; */
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+  width: 50rpx;
 }
 
 .goods-buy .icon.disable {
@@ -351,16 +354,17 @@ page{
 
 
 .user-btn-view .user-btn {
-  width: 100rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  margin-top: 20rpx;
+  width: 95rpx;
+  height: 95rpx;
+  line-height: 95rpx;
   color: white;
-  background: #1A6EDC;
+  background: #128FFA;
   border-radius: 50%;
   text-align: center;
   z-index: 999;
 }
-.user-btn .icon-custom-user {
+.user-btn .iconfont {
   font-size: 1.8em;
 }
 

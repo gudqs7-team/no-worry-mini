@@ -1,0 +1,22 @@
+.title {
+  font-size: 50rpx;
+  font-weight: bold;
+  margin: 20rpx 10rpx;
+  color: #353535;
+}
+
+.phone-list {
+  margin: 50rpx 20rpx;
+  background: #F6F6F6;
+}
+
+.phone-item {
+  margin: 10rpx;
+  padding: 10rpx;
+  font-size: 30rpx;
+  color: #353535;
+}
+
+.phone-item .phone-number {
+  color: #1C00C9;
+}

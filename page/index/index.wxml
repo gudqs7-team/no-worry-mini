@@ -52,6 +52,8 @@
             </view>
           </block>
           <view class="empty-height-view"></view>
+          <view class="empty-height-view"></view>
+          <view class="empty-height-view"></view>
         </scroll-view>
     </view>
 
@@ -113,9 +115,12 @@
       </view>
     </mp-halfScreenDialog>
 
-    <view class="user-btn-view {{isIpx ? 'user-ipx' : ''}}" bindtap="goUserPage">
-      <view class="user-btn">
+    <view class="user-btn-view {{isIpx ? 'user-ipx' : ''}}">
+      <view class="user-btn" bindtap="goUserPage">
         <text class="iconfont icon-custom-user cart-icon"></text>
+      </view>
+      <view class="user-btn" bindtap="goKefuPage">
+        <text class="iconfont icon-kefu cart-icon"></text>
       </view>
     </view>
 

@@ -1,0 +1,15 @@
+<view class="kefu-page">
+  <view class="phone-list">
+    <view class="title"> 客服电话 </view>
+    <view class="phone-item" wx:for="{{phoneList}}" wx:for-item="phone" wx:key="phone" data-phone="{{phone.phone}}" bindtap="copyPhone">
+      {{phone.dong}} 栋: <text class="phone-number"> {{phone.phone}} </text> 
+    </view>
+  </view>
+
+  <view class="kefu">
+    <button type="primary" size="default" open-type="contact" bindcontact="handleContact">
+      <text class="iconfont icon-liaotian cart-icon"></text>
+      在线客服
+    </button>
+  </view>
+</view>
