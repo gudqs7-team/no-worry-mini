@@ -70,9 +70,12 @@
           <button wx:if="{{cartTotalPrice < 5}}" class="weui-btn inactive" type="primary">还差{{(startPriceFen - (cartTotalPrice*10)) / 10}}起送</button>
           <button wx:if="{{cartTotalPrice >= 5}}" class="weui-btn" type="primary" catchtap="goBuyOrder">去结算</button>
         </view>
-        <!-- <view class="cart-btn-area" >
-          <text class="cart-btn">去结算</text>
-        </view> -->
+        <view  wx:if="{{cartTotalPrice < 5}}"  class="cart-btn-area {{cartTotalPrice < 5 ? 'inactive' : ''}}" >
+          <text wx:if="{{cartTotalPrice < 5}}" class="inactive">还差{{(startPriceFen - (cartTotalPrice*10)) / 10}}起送</text>
+        </view>
+        <view  wx:if="{{cartTotalPrice >= 5}}" catchtap="goBuyOrder" class="cart-btn-area {{cartTotalPrice < 5 ? 'inactive' : ''}}" >
+          <text wx:if="{{cartTotalPrice >= 5}}" >去结算</text>
+        </view>
       </view>
 
       <view wx:if="{{showCart}}" class="cart-list">

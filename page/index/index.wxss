@@ -188,6 +188,9 @@ page{
   padding-bottom: 40rpx;
   height: 140rpx;
 }
+.cart-ipx .cart-bottom .cart-btn-area {
+  height: 140rpx;
+}
 
 .shadow {
   position: fixed;
@@ -249,11 +252,14 @@ page{
   right: 0;
   top: 0;
   color: white;
-  background: #1EDE53;
+  background: #07c160;
   font-size: 42rpx;
   font-weight: bold;
   height: 100rpx;
   padding: 15rpx 70rpx;
+}
+.cart-bottom .cart-btn-area.inactive{
+  background: #6D6C6D;
 }
 
 .cart-bottom .order-btn {
