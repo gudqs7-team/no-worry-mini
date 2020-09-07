@@ -59,6 +59,13 @@ Page({
   },
   save() {
     var defaultAddress = this.data.defaultAddress;
+    var dong = this.data.detailCount;
+    if (dong == '6') {
+      wx.showToast({
+        title: '6栋暂停服务',
+      });
+      return false;
+    }
     var detailAddress = this.data.detailCount.replace(/栋/g, '').trim() + '栋 '+ this.data.detailDoor.trim();
     var data = {
       contactName: this.data.contactName,

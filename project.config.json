@@ -1,108 +1,116 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
-	"appid": "wx786bdae70759bb5f",
-	"projectname": "miniprogram-1",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "page/user/user",
-					"pathName": "page/user/user",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "page/user/address/address",
-					"pathName": "page/user/address/address",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "page/order/confirm/confirm",
-					"pathName": "page/order/confirm/confirm",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "page/user/address/edit/edit",
-					"pathName": "page/user/address/edit/edit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "page/order/detail/detail",
-					"pathName": "page/order/detail/detail",
-					"query": "id=30",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "page/order/order",
-					"pathName": "page/order/order",
-					"query": "id=30",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "page/kefu/kefu",
-					"pathName": "page/kefu/kefu",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": true,
+    "useApiHook": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.9.2",
+  "appid": "wx786bdae70759bb5f",
+  "projectname": "miniprogram-1",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "page/user/user",
+          "pathName": "page/user/user",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "page/user/address/address",
+          "pathName": "page/user/address/address",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "page/order/confirm/confirm",
+          "pathName": "page/order/confirm/confirm",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "page/user/address/edit/edit",
+          "pathName": "page/user/address/edit/edit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "page/order/detail/detail",
+          "pathName": "page/order/detail/detail",
+          "query": "id=30",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "page/order/order",
+          "pathName": "page/order/order",
+          "query": "id=30",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "page/kefu/kefu",
+          "pathName": "page/kefu/kefu",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

@@ -1,5 +1,5 @@
 
-var reqHost = 'https://wap.jzxcxin.xyz/noworry';
+var reqHost = 'https://snack.wqfly.cn/noworry';
 // var reqHost = 'http://localhost:9797';
 // var reqHost = 'http://e.jzxcxin.xyz/noworry';
 

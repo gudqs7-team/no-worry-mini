@@ -1,10 +1,10 @@
 {
   "usingComponents": {
-    "mp-cell": "../../../weui/cell/cell",
-    "mp-cells": "../../../weui/cells/cells",
-    "mp-form": "../../../weui/form/form",
-    "mp-checkbox": "../../../weui/checkbox/checkbox",
-    "mp-checkbox-group": "../../../weui/checkbox-group/checkbox-group"
+    "mp-cell": "/weui/cell/cell",
+    "mp-cells": "/weui/cells/cells",
+    "mp-form": "/weui/form/form",
+    "mp-checkbox": "/weui/checkbox/checkbox",
+    "mp-checkbox-group": "/weui/checkbox-group/checkbox-group"
   },
   "navigationBarTitleText": "编辑地址"
 }
